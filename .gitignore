@@ -1,4 +1,9 @@
+# Windows
 *.vcxproj.user
 *.sdf
 *.opensdf
 *.suo
+out
+project/win32/Debug
+project/win32/upload_unitest/Debug
+project/win32/out

@@ -43,11 +43,12 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir>$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
+    <OutDir>$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -70,7 +71,7 @@
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\post_build.cmd $(ProjectDir) $(SolutionDir) $(Configuration) </Command>
+      <Command>$(ProjectDir)\post_build.cmd $(ProjectDir) $(ProjectName) $(Configuration) </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,7 +96,7 @@
       <AdditionalOptions> /SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>$(ProjectDir)..\post_build.cmd $(ProjectDir) $(SolutionDir) $(Configuration) </Command>
+      <Command>$(ProjectDir)\post_build.cmd $(ProjectDir) $(ProjectName) $(Configuration) </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
