@@ -1,0 +1,23 @@
+PODS:
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+
+DEPENDENCIES:
+  - YYKit (from `https://github.com/zhanglehs/YYKit.git`)
+
+EXTERNAL SOURCES:
+  YYKit:
+    :git: https://github.com/zhanglehs/YYKit.git
+
+CHECKOUT OPTIONS:
+  YYKit:
+    :commit: 2ed97e4167e7106e0720a97aee34eadf7459335c
+    :git: https://github.com/zhanglehs/YYKit.git
+
+SPEC CHECKSUMS:
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+
+PODFILE CHECKSUM: 4c3e257cf8e0c95132a7c93bcd5e8930dbc627f8
+
+COCOAPODS: 1.2.0

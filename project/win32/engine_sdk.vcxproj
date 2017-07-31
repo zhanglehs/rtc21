@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4C59B7F5-AB57-4145-877F-E2552B76FD8D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>engine_sdk</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ENGINE_SDK_EXPORTS;_CRT_SECURE_NO_WARNINGS;PTW32_STATIC_LIB;ZLIB_WINAPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\src\util\jsoncpp\include;..\..\src;../../third_party/libevent/windows/include;../../third_party/pthread/windows/include;../../third_party/zlib/windows/include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4200</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;winmm.lib;wldap32.lib;pthreadVC2d.lib;zlibwapi_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../third_party/libevent/windows/lib;../../third_party/pthread/windows/lib;../../third_party/zlib/windows/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <Profile>true</Profile>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>$(ProjectDir)..\post_build.cmd $(ProjectDir) $(SolutionDir) $(Configuration) </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;ENGINE_SDK_EXPORTS;HTTP_ONLY;_CRT_SECURE_NO_WARNINGS;BUILDING_LIBCURL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\src\util\jsoncpp\include;$(ProjectDir)..\..\..\src;$(LIVE_AV_THIRDPARTY)\pthreads\include;$(LIVE_AV_THIRDPARTY)\curl\include\win32;$(LIVE_AV_THIRDPARTY)\libffmpeg\win32\include;$(LIVE_AV_THIRDPARTY)\zlib\include;$(LIVE_AV_THIRDPARTY)\protobuf\include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4200</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>ws2_32.lib;libcurl.lib;winmm.lib;wldap32.lib;pthreadVC2.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;libzlib.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIVE_AV_THIRDPARTY)\pthreads\lib\x86;$(LIVE_AV_THIRDPARTY)\curl\prebuilt\win32;$(LIVE_AV_THIRDPARTY)\libffmpeg\win32\lib;$(LIVE_AV_THIRDPARTY)\zlib\lib\win32;$(LIVE_AV_THIRDPARTY)\protobuf\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions> /SAFESEH:NO %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>$(ProjectDir)..\post_build.cmd $(ProjectDir) $(SolutionDir) $(Configuration) </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\avformat\rtcp_dec.cpp" />
+    <ClCompile Include="..\..\src\avformat\rtcp_enc.cpp" />
+    <ClCompile Include="..\..\src\avformat\rtcp_helper.cpp" />
+    <ClCompile Include="..\..\src\cmd_protocol\proto_common.cpp" />
+    <ClCompile Include="..\..\src\cmd_protocol\proto_rtp_rtcp.cpp" />
+    <ClCompile Include="..\..\src\dllmain.cpp" />
+    <ClCompile Include="..\..\src\download\rtp_download.cpp" />
+    <ClCompile Include="..\..\src\download\rtp_download_internal.cpp" />
+    <ClCompile Include="..\..\src\log\log.cpp" />
+    <ClCompile Include="..\..\src\media_manager\rtp_block.cpp" />
+    <ClCompile Include="..\..\src\media_manager\rtp_block_cache.cpp" />
+    <ClCompile Include="..\..\src\media_manager\rtp_media_manager.cpp" />
+    <ClCompile Include="..\..\src\network\CHttpFetch.cpp" />
+    <ClCompile Include="..\..\src\network\network_channel.cpp" />
+    <ClCompile Include="..\..\src\network\tcp.cpp" />
+    <ClCompile Include="..\..\src\network\udp.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\rtp_receiver_session.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\rtp_receiver_trans.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\rtp_sender_session.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\rtp_sender_trans.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\rtp_session.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\rtp_trans.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\send_side_bandwidth_estimation.cc" />
+    <ClCompile Include="..\..\src\sdk\rtp_format.cpp" />
+    <ClCompile Include="..\..\src\sdp\aac.cpp" />
+    <ClCompile Include="..\..\src\sdp\bits.cpp" />
+    <ClCompile Include="..\..\src\sdp\sdp.cpp" />
+    <ClCompile Include="..\..\src\superlogic\api.cc" />
+    <ClCompile Include="..\..\src\superlogic\RtcCapture.cc" />
+    <ClCompile Include="..\..\src\superlogic\RtcCaptureInternal.cc" />
+    <ClCompile Include="..\..\src\superlogic\RtcPlayer.cc" />
+    <ClCompile Include="..\..\src\superlogic\RtcPlayerInternal.cc" />
+    <ClCompile Include="..\..\src\superlogic\webrtc_base.cc" />
+    <ClCompile Include="..\..\src\upload\rtp_package.cc" />
+    <ClCompile Include="..\..\src\upload\rtp_upload.cpp" />
+    <ClCompile Include="..\..\src\upload\rtp_upload_internal.cpp" />
+    <ClCompile Include="..\..\src\util\base_exception.cpp" />
+    <ClCompile Include="..\..\src\util\data_buffer.cpp" />
+    <ClCompile Include="..\..\src\util\jsoncpp\src\lib_json\json_reader.cpp" />
+    <ClCompile Include="..\..\src\util\jsoncpp\src\lib_json\json_value.cpp" />
+    <ClCompile Include="..\..\src\util\jsoncpp\src\lib_json\json_writer.cpp" />
+    <ClCompile Include="..\..\src\util\util_common.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\avformat\rtcp.h" />
+    <ClInclude Include="..\..\src\avformat\rtp.h" />
+    <ClInclude Include="..\..\src\cmd_protocol\proto_common.h" />
+    <ClInclude Include="..\..\src\cmd_protocol\proto_define.h" />
+    <ClInclude Include="..\..\src\cmd_protocol\proto_define_rtp.h" />
+    <ClInclude Include="..\..\src\cmd_protocol\proto_rtp_rtcp.h" />
+    <ClInclude Include="..\..\src\download\rtp_download_internal.h" />
+    <ClInclude Include="..\..\src\engine_api\avengine_types.h" />
+    <ClInclude Include="..\..\src\engine_api\RtcCapture.h" />
+    <ClInclude Include="..\..\src\engine_api\RtcLog.h" />
+    <ClInclude Include="..\..\src\engine_api\RtcPlayer.h" />
+    <ClInclude Include="..\..\src\engine_api\rtp_api.h" />
+    <ClInclude Include="..\..\src\engine_api\rtp_download.h" />
+    <ClInclude Include="..\..\src\engine_api\rtp_upload.h" />
+    <ClInclude Include="..\..\src\log\log.h" />
+    <ClInclude Include="..\..\src\log\report.h" />
+    <ClInclude Include="..\..\src\media_manager\cache_watcher.h" />
+    <ClInclude Include="..\..\src\media_manager\media_manager_rtp_interface.h" />
+    <ClInclude Include="..\..\src\media_manager\media_manager_state.h" />
+    <ClInclude Include="..\..\src\media_manager\rtp_block.h" />
+    <ClInclude Include="..\..\src\media_manager\rtp_block_cache.h" />
+    <ClInclude Include="..\..\src\media_manager\rtp_media_manager.h" />
+    <ClInclude Include="..\..\src\network\CHttpFetch.h" />
+    <ClInclude Include="..\..\src\network\network_channel.h" />
+    <ClInclude Include="..\..\src\network\tcp.h" />
+    <ClInclude Include="..\..\src\network\udp.h" />
+    <ClInclude Include="..\..\src\rtp_trans\rtp_config.h" />
+    <ClInclude Include="..\..\src\rtp_trans\rtp_receiver_session.h" />
+    <ClInclude Include="..\..\src\rtp_trans\rtp_receiver_trans.h" />
+    <ClInclude Include="..\..\src\rtp_trans\rtp_sender_session.h" />
+    <ClInclude Include="..\..\src\rtp_trans\rtp_sender_trans.h" />
+    <ClInclude Include="..\..\src\rtp_trans\rtp_session.h" />
+    <ClInclude Include="..\..\src\rtp_trans\rtp_trans.h" />
+    <ClInclude Include="..\..\src\rtp_trans\send_side_bandwidth_estimation.h" />
+    <ClInclude Include="..\..\src\sdk\rtp_format.h" />
+    <ClInclude Include="..\..\src\sdk\sdk_interface.h" />
+    <ClInclude Include="..\..\src\sdk\streamid.h" />
+    <ClInclude Include="..\..\src\sdp\aac.h" />
+    <ClInclude Include="..\..\src\sdp\bits.h" />
+    <ClInclude Include="..\..\src\sdp\sdp.h" />
+    <ClInclude Include="..\..\src\superlogic\avengine_api.h" />
+    <ClInclude Include="..\..\src\superlogic\RtcCaptureInternal.h" />
+    <ClInclude Include="..\..\src\superlogic\RtcPlayerInternal.h" />
+    <ClInclude Include="..\..\src\superlogic\webrtc_base.h" />
+    <ClInclude Include="..\..\src\upload\rtp_package.h" />
+    <ClInclude Include="..\..\src\upload\rtp_upload_internal.h" />
+    <ClInclude Include="..\..\src\util\base_exception.h" />
+    <ClInclude Include="..\..\src\util\data_buffer.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\autolink.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\config.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\features.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\forwards.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\json.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\reader.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\value.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\writer.h" />
+    <ClInclude Include="..\..\src\util\jsoncpp\src\lib_json\json_batchallocator.h" />
+    <ClInclude Include="..\..\src\util\json_stream.h" />
+    <ClInclude Include="..\..\src\util\util_common.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\util\jsoncpp\src\lib_json\json_internalarray.inl" />
+    <None Include="..\..\src\util\jsoncpp\src\lib_json\json_internalmap.inl" />
+    <None Include="..\..\src\util\jsoncpp\src\lib_json\json_valueiterator.inl" />
+    <None Include="post_build.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="engine_sdk.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

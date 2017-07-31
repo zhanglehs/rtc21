@@ -1,0 +1,103 @@
+CC = g++
+CFLAGS += -g -m64 -Wall -fno-strict-aliasing -fomit-frame-pointer -fPIC -Wfloat-equal -rdynamic -Wformat=2  -Wno-cast-qual  -pipe -std=c++0x
+SOURCE_DIR = ../../src
+
+THIRD_PARTY_DIR = ../../../../live_av_thirdparty
+CURL_INC_DIR = $(THIRD_PARTY_DIR)/curl/include
+JSON_INC_DIR = $(SOURCE_DIR)/util/jsoncpp/include
+PROTO_BUFFER_INC_DIR = $(THIRD_PARTY_DIR)/protobuf/include
+CINCS += -I $(SOURCE_DIR)
+CINCS += -I $(CURL_INC_DIR)
+CINCS += -I $(JSON_INC_DIR)
+CINCS += -I $(PROTO_BUFFER_INC_DIR)
+
+DEFS += -DLIVESTREAMSDK_EXPORTS
+
+AVCODEC_DIR = $(SOURCE_DIR)/avcodec
+AVCODEC_OBJS = $(AVCODEC_DIR)/aac.o
+
+AVFORMAT_DIR = $(SOURCE_DIR)/avformat
+AVFORMAT_OBJS = $(AVFORMAT_DIR)/rtcp_dec.o $(AVFORMAT_DIR)/rtcp_enc.o $(AVFORMAT_DIR)/rtcp_helper.o $(AVFORMAT_DIR)/sdp.o 
+
+COMMON_DIR = $(SOURCE_DIR)/common
+COMMON_OBJS = $(COMMON_DIR)/proto_common.o $(COMMON_DIR)/proto_rtp_rtcp.o 
+COMMON_OBJS += $(COMMON_DIR)/proto_rtp_ext.pb.o
+
+FRAGMENT_DIR = $(SOURCE_DIR)/fragment
+FRAGMENT_OBJS = $(FRAGMENT_DIR)/rtp_block.o
+
+LAPI_DIR = $(SOURCE_DIR)/lapi
+LAPI_OBJS = $(LAPI_DIR)/lapi.o $(LAPI_DIR)/lapi_create_stream.o $(LAPI_DIR)/lapi_get_playlist.o $(LAPI_DIR)/lapi_get_upload_url.o
+
+LPL_SCHE_DIR = $(SOURCE_DIR)/lpl_sche
+LPL_SCHE_OBJS = $(LPL_SCHE_DIR)/lpl_sche.o $(LPL_SCHE_DIR)/rtp_lpl_sche.o 
+
+LUP_SCHE_DIR = $(SOURCE_DIR)/lup_sche
+LUP_SCHE_OBJS = $(LUP_SCHE_DIR)/lup_sche.o $(LUP_SCHE_DIR)/rtp_lup_sche.o
+
+MEDIA_MANAGER_DIR = $(SOURCE_DIR)/media_manager
+MEDIA_MANAGER_OBJS = $(MEDIA_MANAGER_DIR)/rtp_block_cache.o $(MEDIA_MANAGER_DIR)/rtp_media_manager.o
+
+LOG_DIR = $(SOURCE_DIR)/log
+LOG_OBJS = $(LOG_DIR)/log.o $(LOG_DIR)/report.o $(LOG_DIR)/report_message.o
+
+UTIL_DIR = $(SOURCE_DIR)/util
+UTIL_OBJS = $(UTIL_DIR)/data_buffer.o $(UTIL_DIR)/sdk_thread.o $(UTIL_DIR)/util_common.o $(UTIL_DIR)/base_exception.o $(UTIL_DIR)/url_encdec.o  $(UTIL_DIR)/bit_buffer.o $(UTIL_DIR)/bits.o
+
+NETWORK_DIR = $(SOURCE_DIR)/network
+NETWORK_OBJS = $(NETWORK_DIR)/http_client.o $(NETWORK_DIR)/network_channel.o $(NETWORK_DIR)/tcp.o $(NETWORK_DIR)/udp.o $(NETWORK_DIR)/network.o
+
+RTP_TRANS_DIR = $(SOURCE_DIR)/rtp_trans
+RTP_TRANS_OBJS = $(RTP_TRANS_DIR)/rtp_session.o $(RTP_TRANS_DIR)/rtp_trans.o  $(RTP_TRANS_DIR)/rtp_sender_session.o $(RTP_TRANS_DIR)/rtp_sender_trans.o  $(RTP_TRANS_DIR)/rtp_receiver_session.o $(RTP_TRANS_DIR)/rtp_receiver_trans.o $(RTP_TRANS_DIR)/send_side_bandwidth_estimation.o
+
+SDK_DIR = $(SOURCE_DIR)/sdk
+SDK_OBJS = $(SDK_DIR)/sdk_interface.o 
+
+UPLOAD_DIR = $(SOURCE_DIR)/upload
+UPLOAD_OBJS = $(UPLOAD_DIR)/rtp_upload_internal.o $(UPLOAD_DIR)/rtp_upload_schedule.o
+
+DOWNLOAD_DIR = $(SOURCE_DIR)/download
+DOWNLOAD_OBJS = $(DOWNLOAD_DIR)/jetter_buffer.o $(DOWNLOAD_DIR)/rtp_download_internal.o $(DOWNLOAD_DIR)/rtp_download_schedule.o
+
+SDK_WRAPPER_DIR = $(SOURCE_DIR)/live_stream_sdk
+SDK_WRAPPER_DIR_OBJS = $(SDK_WRAPPER_DIR)/base_sdk.o $(SDK_WRAPPER_DIR)/rtp_download.o $(SDK_WRAPPER_DIR)/rtp_format.o $(SDK_WRAPPER_DIR)/rtp_upload.o 
+
+SUPER_LOGIC_DIR = $(SOURCE_DIR)/superlogic
+SUPER_LOGIC_DIR_OBJS = $(SUPER_LOGIC_DIR)/rtp_enc.o $(SUPER_LOGIC_DIR)/api_downloader.o
+
+JSON_DIR = $(SOURCE_DIR)/util/jsoncpp/src/lib_json
+JSON_DIR_OBJS =  $(JSON_DIR)/json_reader.o $(JSON_DIR)/json_value.o $(JSON_DIR)/json_writer.o
+
+OBJS = $(AVCODEC_OBJS) $(AVFORMAT_OBJS) $(MEDIA_MANAGER_OBJS) $(FRAGMENT_OBJS)
+OBJS += $(LAPI_OBJS) $(LPL_SCHE_OBJS) $(LUP_SCHE_OBJS)
+OBJS += $(COMMON_OBJS) $(UTIL_OBJS) $(NETWORK_OBJS)
+OBJS += $(SDK_OBJS) $(UPLOAD_OBJS) $(DOWNLOAD_OBJS)
+OBJS += $(RTP_TRANS_OBJS) $(LOG_OBJS) $(SDK_WRAPPER_DIR_OBJS)
+OBJS += $(SUPER_LOGIC_DIR_OBJS)
+OBJS += $(JSON_DIR_OBJS)
+OBJS += $(OTOBUF_DIR_OBJS)
+
+
+CURL_LIB = $(THIRD_PARTY_DIR)/curl/prebuilt/linux/libcurl.a
+PROTOBUF_LIB = $(THIRD_PARTY_DIR)/protobuf/linux/libprotobuf.so
+
+all:live_stream_sdk
+
+live_stream_sdk:$(CURL_LIB) $(PROTOBUF_LIB) $(OBJS)
+	cp $(CURL_LIB) $(PROTOBUF_LIB) $(SOURCE_DIR)/ -f
+	ar rcs $(SOURCE_DIR)/live_stream_sdk.a $(OBJS)
+	$(CC) $(OBJS) -shared $(CURL_LIB) $(PROTOBUF_LIB)  -o $(SOURCE_DIR)/liblive_stream_sdk.so -lcrypt -lssl
+
+%.o:%.cpp
+	$(CC) -c $(CFLAGS) $(CINCS) $(DEFS) $^ -o $@
+%.o:%.cc
+	$(CC) -c $(CFLAGS) $(CINCS) $(DEFS) $^ -o $@
+
+cleanall:cleanlib clean
+
+cleanlib:
+	@cd $(CURL_DIR); make mostlyclean-recursive; make distclean-recursive; rm -f config.status; rm -rf lib/.deps/; git checkout .
+
+clean:
+	rm -f $(OBJS) $(SOURCE_DIR)/*.a $(SOURCE_DIR)/*.so
+

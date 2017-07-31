@@ -1,0 +1,12 @@
+#source 'https://github.com/CocoaPods/Specs.git'
+
+#ali_source 'alibaba-specs'
+#ali_source 'alibaba-specs-mirror'
+platform :ios,'7.0'
+
+target "LFMixStreamDemo" do
+    #pod 'LFRTPNetwork', :git => 'git@gitlab.alibaba-inc.com:Laifeng-iOS/LFRTPNetwork.git'
+    #pod 'LFRTPPlayerCore', :git => 'git@gitlab.alibaba-inc.com:Laifeng-iOS/LFRTPPlayerCore.git'
+    pod 'YYKit', :git => 'https://github.com/zhanglehs/YYKit.git'
+    #pod 'LFFFmpegFramework'
+end

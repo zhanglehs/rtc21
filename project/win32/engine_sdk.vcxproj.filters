@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\dllmain.cpp" />
+    <ClCompile Include="..\..\src\download\rtp_download_internal.cpp" />
+    <ClCompile Include="..\..\src\superlogic\api.cc" />
+    <ClCompile Include="..\..\src\superlogic\RtcCapture.cc" />
+    <ClCompile Include="..\..\src\superlogic\RtcCaptureInternal.cc" />
+    <ClCompile Include="..\..\src\superlogic\webrtc_base.cc" />
+    <ClCompile Include="..\..\src\upload\rtp_package.cc" />
+    <ClCompile Include="..\..\src\upload\rtp_upload_internal.cpp" />
+    <ClCompile Include="..\..\src\rtp_trans\send_side_bandwidth_estimation.cc">
+      <Filter>rtp_trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rtp_trans\rtp_sender_trans.cpp">
+      <Filter>rtp_trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rtp_trans\rtp_sender_session.cpp">
+      <Filter>rtp_trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rtp_trans\rtp_receiver_trans.cpp">
+      <Filter>rtp_trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rtp_trans\rtp_receiver_session.cpp">
+      <Filter>rtp_trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rtp_trans\rtp_session.cpp">
+      <Filter>rtp_trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rtp_trans\rtp_trans.cpp">
+      <Filter>rtp_trans</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\jsoncpp\src\lib_json\json_reader.cpp">
+      <Filter>util\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\jsoncpp\src\lib_json\json_value.cpp">
+      <Filter>util\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\jsoncpp\src\lib_json\json_writer.cpp">
+      <Filter>util\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\upload\rtp_upload.cpp" />
+    <ClCompile Include="..\..\src\download\rtp_download.cpp" />
+    <ClCompile Include="..\..\src\sdp\sdp.cpp">
+      <Filter>sdp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sdp\aac.cpp">
+      <Filter>sdp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sdp\bits.cpp">
+      <Filter>sdp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\network\CHttpFetch.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\network\network_channel.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\network\tcp.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\network\udp.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sdk\rtp_format.cpp" />
+    <ClCompile Include="..\..\src\cmd_protocol\proto_common.cpp">
+      <Filter>cmd_protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cmd_protocol\proto_rtp_rtcp.cpp">
+      <Filter>cmd_protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\media_manager\rtp_block_cache.cpp">
+      <Filter>rtp_cache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\media_manager\rtp_block.cpp">
+      <Filter>rtp_cache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\media_manager\rtp_media_manager.cpp">
+      <Filter>rtp_cache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avformat\rtcp_dec.cpp">
+      <Filter>rtp_protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avformat\rtcp_enc.cpp">
+      <Filter>rtp_protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\avformat\rtcp_helper.cpp">
+      <Filter>rtp_protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\base_exception.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\data_buffer.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\util_common.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\log\log.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\superlogic\RtcPlayer.cc" />
+    <ClCompile Include="..\..\src\superlogic\RtcPlayerInternal.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\download\rtp_download_internal.h" />
+    <ClInclude Include="..\..\src\sdk\sdk_interface.h" />
+    <ClInclude Include="..\..\src\superlogic\avengine_api.h" />
+    <ClInclude Include="..\..\src\superlogic\RtcCaptureInternal.h" />
+    <ClInclude Include="..\..\src\superlogic\webrtc_base.h" />
+    <ClInclude Include="..\..\src\upload\rtp_package.h" />
+    <ClInclude Include="..\..\src\upload\rtp_upload_internal.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\src\rtp_trans\send_side_bandwidth_estimation.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rtp_trans\rtp_sender_trans.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rtp_trans\rtp_sender_session.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rtp_trans\rtp_receiver_trans.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rtp_trans\rtp_receiver_session.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rtp_trans\rtp_session.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rtp_trans\rtp_trans.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rtp_trans\rtp_config.h">
+      <Filter>rtp_trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\src\lib_json\json_batchallocator.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\json.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\json_stream.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\writer.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\value.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\forwards.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\features.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\reader.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\autolink.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sdp\sdp.h">
+      <Filter>sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sdp\aac.h">
+      <Filter>sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sdp\bits.h">
+      <Filter>sdp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\network\CHttpFetch.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\network\network_channel.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\network\tcp.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\network\udp.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sdk\rtp_format.h" />
+    <ClInclude Include="..\..\src\sdk\streamid.h" />
+    <ClInclude Include="..\..\src\cmd_protocol\proto_common.h">
+      <Filter>cmd_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cmd_protocol\proto_define.h">
+      <Filter>cmd_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cmd_protocol\proto_define_rtp.h">
+      <Filter>cmd_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cmd_protocol\proto_rtp_rtcp.h">
+      <Filter>cmd_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media_manager\rtp_block_cache.h">
+      <Filter>rtp_cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media_manager\rtp_block.h">
+      <Filter>rtp_cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media_manager\rtp_media_manager.h">
+      <Filter>rtp_cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media_manager\cache_watcher.h">
+      <Filter>rtp_cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media_manager\media_manager_state.h">
+      <Filter>rtp_cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\media_manager\media_manager_rtp_interface.h">
+      <Filter>rtp_cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\avformat\rtp.h">
+      <Filter>rtp_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\avformat\rtcp.h">
+      <Filter>rtp_protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\base_exception.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\data_buffer.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\util_common.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\log\report.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\engine_api\rtp_api.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\engine_api\rtp_download.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\engine_api\rtp_upload.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\engine_api\RtcCapture.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\engine_api\avengine_types.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\jsoncpp\include\json\config.h">
+      <Filter>util\jsoncpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\superlogic\RtcPlayerInternal.h" />
+    <ClInclude Include="..\..\src\engine_api\RtcPlayer.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\log\log.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\engine_api\RtcLog.h">
+      <Filter>api</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="engine_sdk.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="post_build.cmd" />
+    <None Include="..\..\src\util\jsoncpp\src\lib_json\json_internalarray.inl">
+      <Filter>util\jsoncpp</Filter>
+    </None>
+    <None Include="..\..\src\util\jsoncpp\src\lib_json\json_internalmap.inl">
+      <Filter>util\jsoncpp</Filter>
+    </None>
+    <None Include="..\..\src\util\jsoncpp\src\lib_json\json_valueiterator.inl">
+      <Filter>util\jsoncpp</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="rtp_trans">
+      <UniqueIdentifier>{41e7cb86-4655-4c3b-a8a4-c461c8a9c83d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{50721b07-8b5f-4d57-9dfa-02dff877860d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\jsoncpp">
+      <UniqueIdentifier>{48560a34-6e18-4fc2-8b17-2198156af58c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdp">
+      <UniqueIdentifier>{3e04b447-3ef8-4bd0-b1eb-429610e50418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="network">
+      <UniqueIdentifier>{4bd3c038-d7c2-4312-bfd3-02a860211897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cmd_protocol">
+      <UniqueIdentifier>{f854594a-967b-4b17-9169-d973f3402c9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rtp_cache">
+      <UniqueIdentifier>{afbe2756-9542-46e5-96b1-950aac19ad23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rtp_protocol">
+      <UniqueIdentifier>{436bf0a4-bff5-496d-8916-07acadd5f412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{5d232728-dc52-4815-9074-8af30a37e839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="api">
+      <UniqueIdentifier>{fae337eb-d79d-4e8f-a287-e5e3cd8fdd66}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    tools:context="com.laifeng.rtc.NetDectActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="DeviceID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView2" />
+
+        <TextView
+            android:text="PUBLIC IP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView3" />
+
+        <TextView
+            android:text="OS VERSION"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView4" />
+        <TextView
+            android:text="Net type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView5" />
+
+        <TextView
+            android:text="PhoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView6" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:text="开始测试"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:id="@+id/startbtn"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true" />
+            <!--
+            <Button
+                android:text="日志"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:id="@+id/logbtn"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true" />
+                !-->
+            <CheckBox
+                android:text="wifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:clickable="false"
+                android:id="@+id/checkBox" />
+            <CheckBox
+                android:text="lapi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:clickable="false"
+                android:id="@+id/checkBox1" />
+            <CheckBox
+                android:text="lus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:clickable="false"
+                android:id="@+id/checkBox2" />
+            <CheckBox
+                android:text="lps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:clickable="false"
+                android:id="@+id/checkBox3" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listview1"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

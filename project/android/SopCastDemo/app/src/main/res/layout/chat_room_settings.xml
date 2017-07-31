@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:drop="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/hostLayout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/hostText"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textIsSelectable="false"
+                    android:layout_width="46dp"
+                    android:layout_height="30dp"
+                    android:text="Host:" />
+                <Spinner
+                    android:layout_width="224dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/livehostspinner"
+                    android:entries="@array/hostarr" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/livelogLayout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/livelogText"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textIsSelectable="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:text="LOG:    " />
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/livelogspinner"
+                    android:entries="@array/logarr" />
+                <com.laifeng.rtc.ui.DropEditText
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chatRoomLogDropEditText"
+                    android:textAlignment="center"
+                    drop:drawableRight="@drawable/drop"
+                    android:contextClickable="true">
+                </com.laifeng.rtc.ui.DropEditText>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/chatRoomAliasLayout"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="45dp"
+                    android:id="@+id/chatRoomAliasTextView"
+                    android:text="Alias:"
+                    android:textAlignment="center"
+                    android:layout_height="31dp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chatRoomAliasEditText"
+                    android:hint="useralias"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="正在直播的房间列表"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/chatRoomRoomsListLayoutOut"
+                android:gravity="center_horizontal">
+                <ListView
+                    android:id="@+id/chatRoomRoomsListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="visible" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/chatRoomRoomsLayout"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chatRoomRoomsTextView"
+                    android:layout_width="57dp"
+                    android:layout_height="match_parent"
+                    android:text="Room: " />
+
+                <EditText
+                    android:id="@+id/charRoomNewRoomsEditText"
+                    android:layout_width="211dp"
+                    android:layout_height="wrap_content"
+                    android:hint="please enter your roomid"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/enterroombtn"
+                android:layout_margin="8dp"
+                android:layout_width="338dp"
+                android:layout_height="wrap_content"
+                android:text="新建房间"/>
+            <LinearLayout
+                android:id="@+id/roomLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--<TextView-->
+                    <!--android:id="@+id/roomText"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                    <!--android:textIsSelectable="false"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="rooms:" />-->
+                <!--<com.laifeng.rtc.ui.DropEditText-->
+                <!--android:id="@+id/drop_edit"-->
+                <!--android:layout_width="208dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--drop:drawableRight="@drawable/drop"-->
+                <!--drop:dropMode="flow_parent" />-->
+            </LinearLayout>
+
+        </LinearLayout>
+</ScrollView>
