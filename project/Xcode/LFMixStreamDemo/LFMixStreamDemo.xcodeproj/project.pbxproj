@@ -23,6 +23,8 @@
 		84FF81341D87C69F00E6635E /* camra_preview@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FF81321D87C69F00E6635E /* camra_preview@3x.png */; };
 		84FF81371D87C71600E6635E /* LFLogTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF81361D87C71600E6635E /* LFLogTestView.m */; };
 		86C9FA671E12580D003517E3 /* start.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 86C9FA661E12580D003517E3 /* start.jpeg */; };
+		B6079E7B1F38037800DE3FFC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F31BC91D9292BA00DA26FF /* libiconv.tbd */; };
+		B6079E7E1F38129100DE3FFC /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84544F2D1D93878D009BD4EC /* VideoToolbox.framework */; };
 		B6585BE41F21FC2700B490EA /* libengine_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE31F21FC2700B490EA /* libengine_sdk.a */; };
 		B6585C0D1F22282600B490EA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF812A1D879E5700E6635E /* AVFoundation.framework */; };
 		B6CCAFB11F21B10C00B17B3E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CCAFB01F21B10C00B17B3E /* CoreMedia.framework */; };
@@ -56,7 +58,6 @@
 		84544F2D1D93878D009BD4EC /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		84544F301D93879A009BD4EC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		84F31BB81D92853B00DA26FF /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		84F31BC51D92929600DA26FF /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		84F31BC71D9292AC00DA26FF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		84F31BC91D9292BA00DA26FF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		84F31BCB1D9292CD00DA26FF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -90,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6079E7E1F38129100DE3FFC /* VideoToolbox.framework in Frameworks */,
+				B6079E7B1F38037800DE3FFC /* libiconv.tbd in Frameworks */,
 				B6585C0D1F22282600B490EA /* AVFoundation.framework in Frameworks */,
 				B6585BE41F21FC2700B490EA /* libengine_sdk.a in Frameworks */,
 				B6CCAFB91F21BB3F00B17B3E /* libengineAdapter_sdk.a in Frameworks */,
@@ -124,7 +127,6 @@
 				84F31BCB1D9292CD00DA26FF /* MediaPlayer.framework */,
 				84F31BC91D9292BA00DA26FF /* libiconv.tbd */,
 				84F31BC71D9292AC00DA26FF /* libc++.tbd */,
-				84F31BC51D92929600DA26FF /* libiconv.2.4.0.tbd */,
 				84F31BB81D92853B00DA26FF /* GLKit.framework */,
 				84FF812A1D879E5700E6635E /* AVFoundation.framework */,
 				84FF81281D879DE400E6635E /* UIKit.framework */,

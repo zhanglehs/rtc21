@@ -7,3 +7,7 @@ out
 project/win32/Debug
 project/win32/upload_unitest/Debug
 project/win32/out
+
+.DS_Store
+xcuserdata
+project/Xcode/LFMixStreamDemo/Pods

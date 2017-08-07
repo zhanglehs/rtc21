@@ -32,18 +32,11 @@
 		866B1E1D1DC33EED007656C0 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866B1D3E1DC33EEC007656C0 /* json_value.cpp */; };
 		866B1E1E1DC33EED007656C0 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866B1D401DC33EEC007656C0 /* json_writer.cpp */; };
 		866B1E231DC33EED007656C0 /* util_common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866B1DCE1DC33EEC007656C0 /* util_common.cpp */; };
-		B6585BE01F21FAFC00B490EA /* libWebRTC-8854-arm-intel-Release.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BDF1F21FAFC00B490EA /* libWebRTC-8854-arm-intel-Release.a */; };
+		B6079E7D1F380B7200DE3FFC /* libWebRTC-Release.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6079E7C1F380B7200DE3FFC /* libWebRTC-Release.a */; };
 		B6585BE91F220DCB00B490EA /* libevent_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE51F220DCB00B490EA /* libevent_core.a */; };
 		B6585BEA1F220DCB00B490EA /* libevent_extra.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE61F220DCB00B490EA /* libevent_extra.a */; };
 		B6585BEB1F220DCB00B490EA /* libevent_pthreads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE71F220DCB00B490EA /* libevent_pthreads.a */; };
 		B6585BEC1F220DCB00B490EA /* libevent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE81F220DCB00B490EA /* libevent.a */; };
-		B6585C151F22288F00B490EA /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585C0E1F22288F00B490EA /* libavcodec.a */; };
-		B6585C161F22288F00B490EA /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585C0F1F22288F00B490EA /* libavfilter.a */; };
-		B6585C171F22288F00B490EA /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585C101F22288F00B490EA /* libavformat.a */; };
-		B6585C181F22288F00B490EA /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585C111F22288F00B490EA /* libavutil.a */; };
-		B6585C191F22288F00B490EA /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585C121F22288F00B490EA /* libswresample.a */; };
-		B6585C1A1F22288F00B490EA /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585C131F22288F00B490EA /* libswscale.a */; };
-		B6585C1B1F22288F00B490EA /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585C141F22288F00B490EA /* libx264.a */; };
 		B6D455641F1F027C0070F7D0 /* proto_common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6D4555E1F1F027C0070F7D0 /* proto_common.cpp */; };
 		B6D455651F1F027C0070F7D0 /* proto_rtp_rtcp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6D455621F1F027C0070F7D0 /* proto_rtp_rtcp.cpp */; };
 		B6D455671F1F02AF0070F7D0 /* rtp_download.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B6D455661F1F02AF0070F7D0 /* rtp_download.cpp */; };
@@ -139,19 +132,12 @@
 		866B1DCE1DC33EEC007656C0 /* util_common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util_common.cpp; sourceTree = "<group>"; };
 		866B1DCF1DC33EEC007656C0 /* util_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_common.h; sourceTree = "<group>"; };
 		86A69B391DC098E400FE527B /* libengine_sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libengine_sdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6585BDF1F21FAFC00B490EA /* libWebRTC-8854-arm-intel-Release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libWebRTC-8854-arm-intel-Release.a"; sourceTree = "<group>"; };
+		B6079E7C1F380B7200DE3FFC /* libWebRTC-Release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libWebRTC-Release.a"; sourceTree = "<group>"; };
 		B6585BE51F220DCB00B490EA /* libevent_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_core.a; path = ../../../third_party/libevent/ios/lib/libevent_core.a; sourceTree = "<group>"; };
 		B6585BE61F220DCB00B490EA /* libevent_extra.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_extra.a; path = ../../../third_party/libevent/ios/lib/libevent_extra.a; sourceTree = "<group>"; };
 		B6585BE71F220DCB00B490EA /* libevent_pthreads.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_pthreads.a; path = ../../../third_party/libevent/ios/lib/libevent_pthreads.a; sourceTree = "<group>"; };
 		B6585BE81F220DCB00B490EA /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent.a; path = ../../../third_party/libevent/ios/lib/libevent.a; sourceTree = "<group>"; };
 		B6585C0B1F2227D600B490EA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B6585C0E1F22288F00B490EA /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavcodec.a; sourceTree = "<group>"; };
-		B6585C0F1F22288F00B490EA /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavfilter.a; sourceTree = "<group>"; };
-		B6585C101F22288F00B490EA /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavformat.a; sourceTree = "<group>"; };
-		B6585C111F22288F00B490EA /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
-		B6585C121F22288F00B490EA /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
-		B6585C131F22288F00B490EA /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
-		B6585C141F22288F00B490EA /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
 		B6D4554F1F1E380C0070F7D0 /* avengine_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avengine_types.h; sourceTree = "<group>"; };
 		B6D455501F1E380C0070F7D0 /* RtcCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtcCapture.h; sourceTree = "<group>"; };
 		B6D455511F1E380C0070F7D0 /* RtcLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtcLog.h; sourceTree = "<group>"; };
@@ -199,18 +185,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6585C151F22288F00B490EA /* libavcodec.a in Frameworks */,
-				B6585C161F22288F00B490EA /* libavfilter.a in Frameworks */,
-				B6585C171F22288F00B490EA /* libavformat.a in Frameworks */,
-				B6585C181F22288F00B490EA /* libavutil.a in Frameworks */,
-				B6585C191F22288F00B490EA /* libswresample.a in Frameworks */,
-				B6585C1A1F22288F00B490EA /* libswscale.a in Frameworks */,
-				B6585C1B1F22288F00B490EA /* libx264.a in Frameworks */,
+				B6079E7D1F380B7200DE3FFC /* libWebRTC-Release.a in Frameworks */,
 				B6585BE91F220DCB00B490EA /* libevent_core.a in Frameworks */,
 				B6585BEA1F220DCB00B490EA /* libevent_extra.a in Frameworks */,
 				B6585BEB1F220DCB00B490EA /* libevent_pthreads.a in Frameworks */,
 				B6585BEC1F220DCB00B490EA /* libevent.a in Frameworks */,
-				B6585BE01F21FAFC00B490EA /* libWebRTC-8854-arm-intel-Release.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,19 +447,12 @@
 		B6585BD61F21F9D800B490EA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B6585C0E1F22288F00B490EA /* libavcodec.a */,
-				B6585C0F1F22288F00B490EA /* libavfilter.a */,
-				B6585C101F22288F00B490EA /* libavformat.a */,
-				B6585C111F22288F00B490EA /* libavutil.a */,
-				B6585C121F22288F00B490EA /* libswresample.a */,
-				B6585C131F22288F00B490EA /* libswscale.a */,
-				B6585C141F22288F00B490EA /* libx264.a */,
+				B6079E7C1F380B7200DE3FFC /* libWebRTC-Release.a */,
 				B6585C0B1F2227D600B490EA /* AVFoundation.framework */,
 				B6585BE51F220DCB00B490EA /* libevent_core.a */,
 				B6585BE61F220DCB00B490EA /* libevent_extra.a */,
 				B6585BE71F220DCB00B490EA /* libevent_pthreads.a */,
 				B6585BE81F220DCB00B490EA /* libevent.a */,
-				B6585BDF1F21FAFC00B490EA /* libWebRTC-8854-arm-intel-Release.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
