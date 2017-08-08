@@ -2,7 +2,6 @@
 #include "LFListener.h"
 #include "engine_api/RtcLog.h"
 #include "engine_api/RtcPlayer.h"
-#include "myLog.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -52,13 +51,13 @@ static void player_message_callback(RtcPlayer* ctx, int msgid, long wParam, long
 
 static void
 com_youku_lflive_LFLiveAPI_register(JNIEnv* env, jobject thiz, jobject context) {
-  LOGI("com_youku_lflive_LFLiveAPI_register");
+  INF("com_youku_lflive_LFLiveAPI_register");
   rtcAndroidInit((void*)jVM, (void*)context);
 }
 
 static void
 com_youku_lflive_LFLiveAPI_unregister(JNIEnv* env, jobject thiz) {
-  LOGI("com_youku_lflive_LFLiveAPI_unregister");
+  INF("com_youku_lflive_LFLiveAPI_unregister");
   rtcAndroidUninit();
 }
 
@@ -77,7 +76,7 @@ static int com_youku_lflive_LFLiveAPI_SetOsVersion(JNIEnv* env, jobject thiz, js
 static int
 com_youku_lflive_LFLiveAPI_StartPlay(JNIEnv* env, jobject thiz, jlong playerCtx, jstring appid,
 jstring alias, jstring host, jstring token, jstring deviceid, jint logLevel){
-  LOGI("com_youku_lflive_LFLiveAPI_StartPlay");
+  INF("com_youku_lflive_LFLiveAPI_StartPlay");
   mkdir(LFRTP_LOG_PATH, 0777);
   if (logLevel == 1)
     live_stream_sdk::LogSetLevel(live_stream_sdk::LOG_LEVEL_NON);
@@ -106,7 +105,7 @@ com_youku_lflive_LFLiveAPI_SetWindow(JNIEnv* env, jobject thiz, jlong playerCtx,
 
 static int
 com_youku_lflive_LFLiveAPI_SetNetworkChanged(JNIEnv* env, jobject thiz, jlong playerCtx){
-  LOGI("com_youku_lflive_LFLiveAPI_SetNetworkChanged");
+  INF("com_youku_lflive_LFLiveAPI_SetNetworkChanged");
   RtcPlayer *player = (RtcPlayer*)playerCtx;
   player->SetNetworkChanged();
   return 0;
@@ -114,7 +113,7 @@ com_youku_lflive_LFLiveAPI_SetNetworkChanged(JNIEnv* env, jobject thiz, jlong pl
 
 static int
 com_youku_lflive_LFLiveAPI_StopPlay(JNIEnv* env, jobject thiz, jlong playerCtx){
-  LOGI("com_youku_lflive_LFLiveAPI_StopPlay");
+  INF("com_youku_lflive_LFLiveAPI_StopPlay");
   RtcPlayer *player = (RtcPlayer*)playerCtx;
   player->Stop();
   return 0;
@@ -122,7 +121,7 @@ com_youku_lflive_LFLiveAPI_StopPlay(JNIEnv* env, jobject thiz, jlong playerCtx){
 
 static int
 com_youku_lflive_LFLiveAPI_DestroyPlayer(JNIEnv* env, jobject thiz, jlong playerCtx){
-  LOGI("com_youku_lflive_LFLiveAPI_DestroyPlayer");
+  INF("com_youku_lflive_LFLiveAPI_DestroyPlayer");
   RtcPlayer *player = (RtcPlayer*)playerCtx;
   LFListener *listener = (LFListener *)player->GetUserdata();
   delete player;
@@ -132,7 +131,7 @@ com_youku_lflive_LFLiveAPI_DestroyPlayer(JNIEnv* env, jobject thiz, jlong player
 
 static int
 com_youku_lflive_LFLiveAPI_SetAVMute(JNIEnv* env, jobject thiz, jlong playerCtx, jboolean mute){
-  LOGI("com_youku_lflive_LFLiveAPI_SetAVMute");
+  INF("com_youku_lflive_LFLiveAPI_SetAVMute");
   RtcPlayer *player = (RtcPlayer*)playerCtx;
   player->Mute((bool)mute);
   return 0;
@@ -140,7 +139,7 @@ com_youku_lflive_LFLiveAPI_SetAVMute(JNIEnv* env, jobject thiz, jlong playerCtx,
 
 static bool
 com_youku_lflive_LFLiveAPI_snapShot(JNIEnv* env, jobject thiz, jlong playerCtx, jstring path){
-  LOGI("com_youku_lflive_LFLiveAPI_snapShot");
+  INF("com_youku_lflive_LFLiveAPI_snapShot");
   CJstringToString _path(env, path);
   RtcPlayer *player = (RtcPlayer*)playerCtx;
   return player->Snapshot(_path.getString());
@@ -187,20 +186,20 @@ int JNI_OnLoad(JavaVM* vm, void* reserved) {
   JNIEnv* env = NULL;
   jint ret = JNI_ERR;
   if (vm->GetEnv((void**)&env, JNI_VERSION_1_4) != JNI_OK) {
-    LOGE("GetEnv failed!");
+    ERR("GetEnv failed!");
     return ret;
   }
   assert(env != NULL);
   if (registerLFLiveAPIMethods(env) != JNI_OK) {
-    LOGE("can not load lfliveapi methods!");
+    ERR("can not load lfliveapi methods!");
     return ret;
   }
   if (registerRtpUploadMethods(env) != JNI_OK) {
-    LOGE("can not load rtpupload methods!");
+    ERR("can not load rtpupload methods!");
     return ret;
   }
   ret = JNI_VERSION_1_4;
-  LOGI("Loaded!");
+  INF("%s, Loaded!", __FUNCTION__);
   return ret;
 }
 

@@ -1,6 +1,5 @@
 #include "engine_api/rtp_upload.h"
 #include "engine_api/RtcLog.h"
-#include "myLog.h"
 #include "LFListener.h"
 #include "engine_api/rtp_api.h"
 
@@ -48,8 +47,7 @@ CapturerMessageCallback(RtcCapture* ctx, unsigned int msgid, int wParam, int lPa
 
 static jlong
 jni_Create(JNIEnv* env, jobject thiz) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
-
+  INF("%s", __FUNCTION__);
   RtcCapture *capturer = new RtcCapture("xxxdeviceidxxx");
   capturer->SetUserdata(new LFListener(env, thiz));
   return (jlong)capturer;
@@ -57,7 +55,7 @@ jni_Create(JNIEnv* env, jobject thiz) {
 
 static void
 jni_Destroy(JNIEnv* env, jobject thiz, jlong jniCtx) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
+  INF("%s", __FUNCTION__);
   if (jniCtx == 0) {
     return;
   }
@@ -71,7 +69,7 @@ jni_Destroy(JNIEnv* env, jobject thiz, jlong jniCtx) {
 static jint
 jni_StartCapture(JNIEnv* env, jobject thiz, jlong jniCtx, jstring jaudio_deviceid, jstring jvideo_deviceid,
                  jint video_capture_width, jint video_capture_height) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
+  INF("%s", __FUNCTION__);
   if (jniCtx == 0) {
     return -1;
   }
@@ -89,7 +87,7 @@ jni_StartCapture(JNIEnv* env, jobject thiz, jlong jniCtx, jstring jaudio_devicei
 
 static jint
 jni_StartPreview(JNIEnv* env, jobject thiz, jlong jniCtx, jobject surface) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
+  INF("%s", __FUNCTION__);
   if (jniCtx == 0) {
     return -1;
   }
@@ -101,7 +99,7 @@ jni_StartPreview(JNIEnv* env, jobject thiz, jlong jniCtx, jobject surface) {
 static jint
 jni_StartSend(JNIEnv* env, jobject thiz, jlong jniCtx, jstring jlapi, jstring jappid, jstring jalias,
               jstring jtoken, jint video_encode_width, jint video_encode_height, jint video_bitrate) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
+  INF("%s", __FUNCTION__);
   if (jniCtx == 0) {
     return -1;
   }
@@ -135,7 +133,7 @@ jni_StartSend(JNIEnv* env, jobject thiz, jlong jniCtx, jstring jlapi, jstring ja
 
 static void
 jni_StopSend(JNIEnv* env, jobject thiz, jlong jniCtx) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
+  INF("%s", __FUNCTION__);
   if (jniCtx == 0) {
     return;
   }
@@ -146,7 +144,7 @@ jni_StopSend(JNIEnv* env, jobject thiz, jlong jniCtx) {
 
 static void
 jni_StopPreview(JNIEnv* env, jobject thiz, jlong jniCtx) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
+  INF("%s", __FUNCTION__);
   if (jniCtx == 0) {
     return;
   }
@@ -157,7 +155,7 @@ jni_StopPreview(JNIEnv* env, jobject thiz, jlong jniCtx) {
 
 static void
 jni_Stop(JNIEnv* env, jobject thiz, jlong jniCtx) {
-  LOGI("%s:%s", __FILE__, __FUNCTION__);
+  INF("%s", __FUNCTION__);
   if (jniCtx == 0) {
     return;
   }
@@ -182,7 +180,7 @@ int jniRegisterClassNativeMethods(JNIEnv* env, const char * classname, const JNI
   int ret = -1;
   clazz = env->FindClass(classname);
   if (clazz == NULL) {
-    LOGE("Native registration unable to find class '%s'\n", classname);
+    ERR("Native registration unable to find class '%s'\n", classname);
     return ret;
   }
   if ((ret = env->RegisterNatives(clazz, methods, count)) < 0) {
