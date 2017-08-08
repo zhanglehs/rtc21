@@ -20,9 +20,10 @@
 
 #ifdef WIN32
 #include <io.h>
-#elif defined(ANDROID)
+#elif defined(__ANDROID__)
 #include <dirent.h>
 #include <sys/stat.h>
+#include <android/log.h>
 #else
 #include <glob.h>
 #endif
@@ -67,7 +68,11 @@ namespace {
 #endif
 
   void DefaultLogCallback(const char *msg) {
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "rtc21", "%s", msg);
+#else
     printf("%s", msg);
+#endif
   }
 
   char s_deviceid[512] = { 0 };

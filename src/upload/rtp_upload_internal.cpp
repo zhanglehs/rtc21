@@ -356,6 +356,7 @@ namespace live_stream_sdk {
     sprintf(url, "http://%s/v1/get_upload_url?app_id=%s&alias=%s&upload_token=%s",
       m_user_config.lapi_host,
       m_user_config.appid, m_user_config.alias, m_user_config.lapi_token);
+    INF("%s, http url=%s", __FUNCTION__, url);
     m_http_upload_url->Get(url,
       std::bind(&RTPUploadInternal::OnGetUploadUrlFinish, this,
       std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
@@ -365,6 +366,7 @@ namespace live_stream_sdk {
     bool success = false;
     if (code >= 200 && code < 300) {
       if (data && len > 0) {
+        INF("%s, http code=%d, response=%s", __FUNCTION__, code, data);
         std::string url;
         unsigned int stream_id = 0;
 
@@ -386,12 +388,9 @@ namespace live_stream_sdk {
             }
             success = true;
           }
-          else {
-            ERR("parse get upload url response failed, response: %s", data);
-          }
         }
         catch (std::exception &) {
-          ERR("parse get upload url response failed, response: %s", data);
+          INF("%s, parse response exception", __FUNCTION__);
         }
 
         if (success) {
@@ -412,7 +411,7 @@ namespace live_stream_sdk {
     }
     else {
       if (data && len > 0) {
-        ERR("get upload url failed, response: %s", data);
+        INF("%s, failed, http code=%d, response=%s", __FUNCTION__, code, data);
       }
     }
 
@@ -424,6 +423,7 @@ namespace live_stream_sdk {
   }
 
   void RTPUploadInternal::OnGetUploadUrlFailed(int httpcode) {
+    INF("%s, failed, http code=%d", __FUNCTION__, httpcode);
     if (httpcode >= 200 && httpcode < 600) {
       m_quit_thread = true;
       event_base_loopbreak(m_ev_base);
@@ -442,6 +442,7 @@ namespace live_stream_sdk {
       return;
     }
     m_http_mcu = CHttpFetch::Create(m_ev_base);
+    INF("%s, http url=%d", __FUNCTION__, m_internal_config.upload_url);
     m_http_mcu->Get(m_internal_config.upload_url,
       std::bind(&RTPUploadInternal::OnGetMcuInfoFinish, this,
       std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
@@ -451,7 +452,7 @@ namespace live_stream_sdk {
     bool success = false;
     if (code >= 200 && code < 300) {
       if (data && len > 0) {
-
+        INF("%s, http code=%d, response=%s", __FUNCTION__, code, data);
         std::string ip;
         unsigned int udp_port = 0;
         unsigned int tcp_port = 0;
@@ -494,12 +495,9 @@ namespace live_stream_sdk {
               success = true;
             }
           }
-          else {
-            ERR("parse get lus response failed, response: %s", data);
-          }
         }
         catch (std::exception &) {
-          ERR("parse get lus response failed, response: %s", data);
+          INF("%s, parse response exception", __FUNCTION__);
         }
 
         if (success) {
@@ -528,7 +526,7 @@ namespace live_stream_sdk {
     }
     else {
       if (data && len > 0) {
-        ERR("get lus failed, response: %s", data);
+        INF("%s, failed, http code=%d, response=%s", __FUNCTION__, code, data);
       }
     }
 
@@ -540,6 +538,7 @@ namespace live_stream_sdk {
   }
 
   void RTPUploadInternal::OnGetMcuInfoFailed(int httpcode) {
+    INF("%s, failed, http code=%d", __FUNCTION__, httpcode);
     if (httpcode >= 200 && httpcode < 600) {
       m_quit_thread = true;
       event_base_loopbreak(m_ev_base);
@@ -554,12 +553,14 @@ namespace live_stream_sdk {
   void RTPUploadInternal::SendSdp() {
     m_state_internal = InternalState::INTERNAL_STATE_SEND_SDP;
     m_http_sdp = CHttpFetch::Create(m_ev_base);
+    INF("%s, http url=%s", __FUNCTION__, m_internal_config.sdp_url);
     m_http_sdp->Put(m_internal_config.sdp_url, m_sdp.c_str(), -1,
       std::bind(&RTPUploadInternal::OnSendSdpFinish, this,
       std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
   }
 
   void RTPUploadInternal::OnSendSdpFinish(int httpcode, const char* data, int len) {
+    INF("%s, http code=%d", __FUNCTION__, httpcode);
     if (httpcode >= 200 && httpcode < 300) {
       OnSendSdpSuccessed();
     }
@@ -605,17 +606,16 @@ namespace live_stream_sdk {
       tcp = !m_internal_config.is_tcp;
     }
     m_internal_config.is_tcp = tcp;
-
     try {
       if (tcp) {
         _channel.reset(new network::CMDTCPChannel());
-        INF("upload server ip:%s,tcp port:%d.", m_internal_config.mcu_ip, (int)m_internal_config.mcu_tcp_port);
+        INF("%s, tcp, server ip:%s, port:%d.", __FUNCTION__, m_internal_config.mcu_ip, (int)m_internal_config.mcu_tcp_port);
         _channel->init(m_internal_config.mcu_ip, m_internal_config.mcu_tcp_port, true);
       }
       else {
         m_udp_connect_count++;
         _channel.reset(new network::SimpleUDPChannel());
-        INF("upload server ip:%s,udp port:%d.", m_internal_config.mcu_ip, (int)m_internal_config.mcu_udp_port);
+        INF("%s, udp, server ip:%s port:%d.", __FUNCTION__, m_internal_config.mcu_ip, (int)m_internal_config.mcu_udp_port);
         _channel->init(m_internal_config.mcu_ip, m_internal_config.mcu_udp_port, true);
       }
 
@@ -623,18 +623,21 @@ namespace live_stream_sdk {
       _channel->set_nonblock();
       _rtp_trans->set_channel(_channel);
 
-      INF("setup channel success, waiting for connected.");
+      INF("%s, create channel success, waiting for connected.", __FUNCTION__);
       m_state_internal = InternalState::INTERNAL_STATE_MCU_CONNECTING;
     }
     catch (BaseException&) {
-      ERR("setup channel failed, reconnecting...");
+      ERR("%s, setup channel failed, reconnecting...", __FUNCTION__);
       m_retry_task->Post(m_ev_base, std::bind(&RTPUploadInternal::Retry, this), 1000);
       return -1;
     }
 
+#ifndef __ANDROID__
+    // TODO: zhangle
     m_ev_closed = event_new(m_ev_base, _channel->get_sock_fd(), EV_CLOSED | EV_PERSIST, OnSocketClosed, this);
-    m_ev_writable = event_new(m_ev_base, _channel->get_sock_fd(), EV_WRITE, OnSocketWritable, this);
     event_add(m_ev_closed, NULL);
+#endif
+    m_ev_writable = event_new(m_ev_base, _channel->get_sock_fd(), EV_WRITE, OnSocketWritable, this);
     event_add(m_ev_writable, NULL);
 
     return 0;
@@ -684,6 +687,7 @@ namespace live_stream_sdk {
         return -1;
       }
       if (rsp.result != 0) {
+        ERR("%s, cmd handshake failed.", __FUNCTION__);
         m_quit_thread = true;
         event_base_loopbreak(m_ev_base);
         SetState(RtcCaptureState::RTC_CAPTURE_STATE_ERROR, RtcCaptureErrorType::RTC_CAPTURE_ERROR_MCU_DENY);
@@ -888,6 +892,7 @@ namespace live_stream_sdk {
 
   int32_t RTPUploadInternal::Stop() {
     m_quit_thread = true;
+    INF("%s", __FUNCTION__);
     if (m_ev_base) {
       event_base_loopbreak(m_ev_base);
     }

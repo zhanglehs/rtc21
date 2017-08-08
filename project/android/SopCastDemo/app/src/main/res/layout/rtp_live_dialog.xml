@@ -88,7 +88,7 @@
                 android:hint="video bps"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="1300"/>
+                android:text="800"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/fecLayout"

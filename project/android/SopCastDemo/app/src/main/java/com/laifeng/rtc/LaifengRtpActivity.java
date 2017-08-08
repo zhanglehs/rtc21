@@ -277,7 +277,8 @@ public class LaifengRtpActivity extends Activity {
                     mCapturer.Create();
                     ret = mCapturer.StartCapture("", "", 640, 360);
                     ret = mCapturer.StartPreview(mLFLiveView.getHolder().getSurface());
-                    ret = mCapturer.StartSend("101.201.57.242", "301", "zhangle2", "98765", 640, 360, 800000);
+                    ret = mCapturer.StartSend("101.201.57.242", "301", "zhangle", "98765", 640, 360, 800000);
+
                 } else {
                     mCapturer.Stop();
                     mCapturer = null;

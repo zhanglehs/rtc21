@@ -3,6 +3,7 @@
 #include "myLog.h"
 #include "engine_api/RtcCapture.h"
 #include "LFListener.h"
+#include "engine_api/rtp_api.h"
 
 #include <jni.h>
 #include <android/log.h>
@@ -572,6 +573,16 @@ jni_StartSend(JNIEnv* env, jobject thiz, jlong jniCtx, jstring jlapi, jstring ja
   encode.video_encode_height = video_encode_height;
   encode.video_bitrate = video_bitrate;
   RtcCapture *capturer = (RtcCapture*)jniCtx;
+
+  // INFO: zhangle, create stream is test code
+  char streamid[256] = { 0 };
+  char url[1024];
+  sprintf(url, "http://%s/v1/create_stream?app_id=%s&alias=%s&stream_type=rtp&res=%dx%d&rt=400&stream_format=rtp&nt=1&token=98765&p2p=0",
+          lapi.getString(), appid.getString(), alias.getString(), video_encode_width, video_encode_height);
+  INF("%s, create stream, url=%s", __FUNCTION__, url);
+  create_stream_sync(streamid, url);
+  INF("%s, create stream finished", __FUNCTION__);
+
   return capturer->StartEncodeAndSend(&net, &encode, CapturerMessageCallback);
 }
 
