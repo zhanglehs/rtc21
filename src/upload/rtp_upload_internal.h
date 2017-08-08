@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../engine_api/rtp_upload.h"
 #include "../upload/rtp_package.h"
@@ -168,7 +168,7 @@ namespace live_stream_sdk {
     unsigned int m_audio_frequence;
     unsigned int m_audio_frame_size;
 
-    // m_stateÊÇ¸øÍâ²¿¿´µ½µÄ×´Ì¬£¬m_state_internalÔòÊÇÄÚ²¿¸ü¾«Ï¸»¯µÄ×´Ì¬=RtcCaptureState+InternalState
+    // m_stateæ˜¯ç»™å¤–éƒ¨çœ‹åˆ°çš„çŠ¶æ€ï¼Œm_state_internalåˆ™æ˜¯å†…éƒ¨æ›´ç²¾ç»†åŒ–çš„çŠ¶æ€=RtcCaptureState+InternalState
     RtcCaptureState m_state;
     enum InternalState {
       INTERNAL_STATE_GET_UPLOAD_URL,

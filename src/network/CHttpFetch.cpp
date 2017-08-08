@@ -1,4 +1,4 @@
-#include "CHttpFetch.h"
+ï»¿#include "CHttpFetch.h"
 
 #include <event2/thread.h>
 #include <assert.h>
@@ -223,7 +223,7 @@ void CHttpFetch::Get(const char *url,
   //// This function will copy the uri string, and finally will be free automatically by libevent
   //evhttp_make_request(ev_connection, ev_request, EVHTTP_REQ_GET, path_query.c_str());
 
-  //// ¼¸¸öµØ·½´«ÈëµÄconst char *Ö¸Õë£¬ÔÚlibeventÄÚ²¿»ácopyÒ»·İ£¬²¢×îÖÕ×Ô¶¯ÊÍ·Å£¬¼´ÉÏ²ãÎŞĞè±£ÕÏÖ¸ÕëµÄÄÚÈİÒ»Ö±ÓĞĞ§
+  //// å‡ ä¸ªåœ°æ–¹ä¼ å…¥çš„const char *æŒ‡é’ˆï¼Œåœ¨libeventå†…éƒ¨ä¼šcopyä¸€ä»½ï¼Œå¹¶æœ€ç»ˆè‡ªåŠ¨é‡Šæ”¾ï¼Œå³ä¸Šå±‚æ— éœ€ä¿éšœæŒ‡é’ˆçš„å†…å®¹ä¸€ç›´æœ‰æ•ˆ
 
   //evhttp_uri_free(ev_uri);
   //m_ev_connection = ev_connection;
@@ -271,7 +271,7 @@ void CHttpFetch::Post(const char *url, const char *data, int len,
   //// This function will copy the uri string, and finally will be free automatically by libevent
   //evhttp_make_request(ev_connection, ev_request, EVHTTP_REQ_POST, path_query.c_str());
 
-  //// ¼¸¸öµØ·½´«ÈëµÄconst char *Ö¸Õë£¬ÔÚlibeventÄÚ²¿»ácopyÒ»·İ£¬²¢×îÖÕ×Ô¶¯ÊÍ·Å£¬¼´ÉÏ²ãÎŞĞè±£ÕÏÖ¸ÕëµÄÄÚÈİÒ»Ö±ÓĞĞ§
+  //// å‡ ä¸ªåœ°æ–¹ä¼ å…¥çš„const char *æŒ‡é’ˆï¼Œåœ¨libeventå†…éƒ¨ä¼šcopyä¸€ä»½ï¼Œå¹¶æœ€ç»ˆè‡ªåŠ¨é‡Šæ”¾ï¼Œå³ä¸Šå±‚æ— éœ€ä¿éšœæŒ‡é’ˆçš„å†…å®¹ä¸€ç›´æœ‰æ•ˆ
 
   //evhttp_uri_free(ev_uri);
   //m_ev_connection = ev_connection;
@@ -319,7 +319,7 @@ void CHttpFetch::Put(const char *url, const char *data, int len,
   //// This function will copy the uri string, and finally will be free automatically by libevent
   //evhttp_make_request(ev_connection, ev_request, EVHTTP_REQ_PUT, path_query.c_str());
 
-  //// ¼¸¸öµØ·½´«ÈëµÄconst char *Ö¸Õë£¬ÔÚlibeventÄÚ²¿»ácopyÒ»·İ£¬²¢×îÖÕ×Ô¶¯ÊÍ·Å£¬¼´ÉÏ²ãÎŞĞè±£ÕÏÖ¸ÕëµÄÄÚÈİÒ»Ö±ÓĞĞ§
+  //// å‡ ä¸ªåœ°æ–¹ä¼ å…¥çš„const char *æŒ‡é’ˆï¼Œåœ¨libeventå†…éƒ¨ä¼šcopyä¸€ä»½ï¼Œå¹¶æœ€ç»ˆè‡ªåŠ¨é‡Šæ”¾ï¼Œå³ä¸Šå±‚æ— éœ€ä¿éšœæŒ‡é’ˆçš„å†…å®¹ä¸€ç›´æœ‰æ•ˆ
 
   //evhttp_uri_free(ev_uri);
   //m_ev_connection = ev_connection;
@@ -378,7 +378,7 @@ void CHttpFetch::Request(enum evhttp_cmd_type type,
   // This function will copy the uri string, and finally will be free automatically by libevent
   evhttp_make_request(ev_connection, ev_request, type, path_query.c_str());
 
-  // ¼¸¸öµØ·½´«ÈëµÄconst char *Ö¸Õë£¬ÔÚlibeventÄÚ²¿»ácopyÒ»·İ£¬²¢×îÖÕ×Ô¶¯ÊÍ·Å£¬¼´ÉÏ²ãÎŞĞè±£ÕÏÖ¸ÕëµÄÄÚÈİÒ»Ö±ÓĞĞ§
+  // å‡ ä¸ªåœ°æ–¹ä¼ å…¥çš„const char *æŒ‡é’ˆï¼Œåœ¨libeventå†…éƒ¨ä¼šcopyä¸€ä»½ï¼Œå¹¶æœ€ç»ˆè‡ªåŠ¨é‡Šæ”¾ï¼Œå³ä¸Šå±‚æ— éœ€ä¿éšœæŒ‡é’ˆçš„å†…å®¹ä¸€ç›´æœ‰æ•ˆ
 
   evhttp_uri_free(ev_uri);
   m_ev_connection = ev_connection;
@@ -388,7 +388,7 @@ void CHttpFetch::Request(enum evhttp_cmd_type type,
 void CHttpFetch::CancelInternal() {
   if (!event_base_got_break(m_base) && !event_base_got_exit(m_base)
     && event_base_get_running_event(m_base) == m_done_task.GetEvent()) {
-    // ´ËÊ±±íÊ¾http»Øµ÷ÖĞµ÷ÓÃÁË±¾·½·¨¡£ÕâÊÇºÜ²»ÓÑºÃµÄµ÷ÓÃ·½Ê½£¬Ó¦¾¡Á¿±ÜÃâ¸ÃÊ¹ÓÃ·½Ê½
+    // æ­¤æ—¶è¡¨ç¤ºhttpå›è°ƒä¸­è°ƒç”¨äº†æœ¬æ–¹æ³•ã€‚è¿™æ˜¯å¾ˆä¸å‹å¥½çš„è°ƒç”¨æ–¹å¼ï¼Œåº”å°½é‡é¿å…è¯¥ä½¿ç”¨æ–¹å¼
     return;
   }
 

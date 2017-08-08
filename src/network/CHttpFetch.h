@@ -1,4 +1,4 @@
-#include <pthread.h>
+ï»¿#include <pthread.h>
 
 #include <string>
 #include <map>
@@ -30,13 +30,13 @@ private:
 
 class CHttpFetch {
 public:
-  // ²»Ö§³ÖÓÉÍâ²¿Ö¸¶¨baseµÄautofree http
+  // ä¸æ”¯æŒç”±å¤–éƒ¨æŒ‡å®šbaseçš„autofree http
   static CHttpFetch* Create(bool autofree = false);
   static CHttpFetch* Create(struct event_base *base);
   static void Destroy(CHttpFetch* http);
 
-  // ÍË³öapp£¬Ğ¶ÔØso/dllÊ±£¬µ÷ÓÃ¸Ãº¯Êı
-  // £¨Èç¹ûCreateÊ±Ä³¸öCHttpFetchµÄbase = NULL»òautofree = true£¬ÔòÔÚÍË³öÄ£¿éÊ±ĞèÇåÀí£©
+  // é€€å‡ºappï¼Œå¸è½½so/dllæ—¶ï¼Œè°ƒç”¨è¯¥å‡½æ•°
+  // ï¼ˆå¦‚æœCreateæ—¶æŸä¸ªCHttpFetchçš„base = NULLæˆ–autofree = trueï¼Œåˆ™åœ¨é€€å‡ºæ¨¡å—æ—¶éœ€æ¸…ç†ï¼‰
   static void FinalDestroy();
 
   void Get(const char *url, const std::function<void(int, const char *, unsigned int)> &callback = std::function<void(int, const char *, unsigned int)>());

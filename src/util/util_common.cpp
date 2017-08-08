@@ -1,4 +1,4 @@
-/**
+ï»¿/**
 * @file
 * @brief
 * @author   songshenyi
@@ -236,7 +236,7 @@ namespace avutil
 
 namespace live_stream_sdk {
   bool IsThreadIdValid(pthread_t *threadid) {
-    // Ö»ÒªÖ¸ÏòµÄÄÚ´æ²»ÎªÈ«0£¬ÔòÊÇÓĞĞ§µÄ
+    // åªè¦æŒ‡å‘çš„å†…å­˜ä¸ä¸ºå…¨0ï¼Œåˆ™æ˜¯æœ‰æ•ˆçš„
     char *p = (char *)threadid;
     for (int i = 0; i < sizeof(pthread_t); i++) {
       if (p[i]) {
