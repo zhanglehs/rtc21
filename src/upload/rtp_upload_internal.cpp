@@ -1,4 +1,4 @@
-#include "rtp_upload_internal.h"
+ï»¿#include "rtp_upload_internal.h"
 
 #include "../avformat/rtcp.h"
 #include "../cmd_protocol/proto_common.h"
@@ -88,7 +88,7 @@ namespace live_stream_sdk {
     memset(&m_network_statistic, 0, sizeof(m_network_statistic));
     m_audio_frequence = 48000;
 #ifdef WIN32
-    // TODO: zhangle, Õâ¸öÖµÓ¦´ÓcodecÖĞ»ñÈ¡
+    // TODO: zhangle, è¿™ä¸ªå€¼åº”ä»codecä¸­è·å–
     m_audio_frame_size = 1024;
 #else
     m_audio_frame_size = 1024;
@@ -941,7 +941,7 @@ namespace live_stream_sdk {
     m_packets.push_back(EncodedFrame(data2, (unsigned int)len, timestamp_ms, true, false));
     while (m_packets.back().ts_ms - m_packets.front().ts_ms > 1500) {
       // drop packet, drop packet until a video keyframe
-      // Ë¼Â·£ºÏÈÕÒµ½1¸ö·ÇIDRµÄvideo£¬È»ºóÔÙÕÒµ½1¸öIDRµÄvideo£¬´ËÊ±¿ÉÒÔ¶ª°üµ½IDR video¡£
+      // æ€è·¯ï¼šå…ˆæ‰¾åˆ°1ä¸ªéIDRçš„videoï¼Œç„¶åå†æ‰¾åˆ°1ä¸ªIDRçš„videoï¼Œæ­¤æ—¶å¯ä»¥ä¸¢åŒ…åˆ°IDR videoã€‚
       bool found_no_keyframe = false;
       bool dropped = false;
       for (auto it = m_packets.begin(); it != m_packets.end(); it++) {
