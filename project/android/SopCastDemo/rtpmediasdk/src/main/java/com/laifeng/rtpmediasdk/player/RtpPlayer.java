@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.PowerManager;
 import android.util.Log;
 import android.view.Surface;
-import java.lang.ref.WeakReference;
 
 public class RtpPlayer {
 
@@ -13,35 +12,16 @@ public class RtpPlayer {
 
 	private native static void native_register(Object context);
 	private native static void native_unregister();
-	private native void native_setup();
 
 	private native long native_CreatePlayer();
 	private native int native_StartPlay(long ctx,
-										String appid, String alias, String host,String token,String deviceid,String extraparams,int logLevel);
+										String appid, String alias, String host,String token,String deviceid,int logLevel);
 	private native int native_SetWindow(long ctx, Object surface);
-	private native int native_AdvancedInitPlayer(long ctx,String appid, String alias,String host,
-												 String token,String deviceid,int logLevel);
-	private native void native_SetDownloadParams(long ctx,String ip,String udpport,String tcpport,
-												 String httpport,String streamid,int enablefec,int enablenack,
-												 int is_lostpacketStrategy,int IlostpacketToScreen,int PlostpacketToScreen);
-	private native int native_AdvancedStartPlay(long ctx);
-	private native int native_AdvancedSetDownloadReportPlayDelay(long ctx,boolean enable);
 	private native int native_StopPlay(long ctx);
 	private native int native_SetNetworkChanged(long ctx);
-	private native String native_getPlaylist(long ctx);
-	private native int native_SetAVMute(long ctx,int status);
-	private native int native_SetAVMode(long ctx,int avmode);
+	private native int native_SetAVMute(long ctx,boolean mute);
 	private native int native_DestroyPlayer(long ctx);
-	private native String native_GetLogStat(long ctx);
-	private native String native_GetDownloadIp(long ctx);
-	private native int native_GetDownloadUdpPort(long ctx);
-	private native int native_GetDownloadTcpPort(long ctx);
-	private native int native_GetDownloadHttpPort(long ctx);
-	private native String native_GetDownloadStreamId(long ctx);
 	private native static int native_SetOsVersion(String osVersion);
-	public native float native_getFramesPerSecond(long ctx);//帧率
-	public native long native_getBitRate(long ctx);//码率
-	public native long native_getAvgKeyFrameSize(long ctx);//I帧平均大小
 	public native boolean native_snapShot(long ctx,String var1);
 
 	private static boolean mRegistered = false;
@@ -53,7 +33,6 @@ public class RtpPlayer {
 	private boolean mIsPlaying;
 
 	public RtpPlayer() {
-		native_setup();
 	}
 
 	public void setCallback(LFLiveCallback cb)
@@ -119,9 +98,9 @@ public class RtpPlayer {
 	}
 
 	public int StartPlay(String appid,
-						 String alias,String host, String token,String deviceid,String extraparams,int logLevel){
+						 String alias,String host, String token,String deviceid,int logLevel){
 		Log.d(TAG, "StartPlay "+"appid:"+appid+",alias:"+alias+",host:"+host+ ",token:"+token);
-		int ret = native_StartPlay(jniPlayerCtx, appid, alias, host,token,deviceid,extraparams,logLevel);
+		int ret = native_StartPlay(jniPlayerCtx, appid, alias, host,token,deviceid,logLevel);
 		if(ret == 0)
 			mIsPlaying = true;
 		return ret;
@@ -131,40 +110,6 @@ public class RtpPlayer {
 		return native_SetWindow(jniPlayerCtx, surface);
 	}
 
-	public synchronized int AdvancedInitPlayer(String appid, String alias,String host, String token,String deviceid,int logLevel){
-		Log.d(TAG, "AdvancedInitPlay "+"appid:"+appid+",alias:"+alias+",host:"+host+ ",token:"+token);
-		return native_AdvancedInitPlayer(jniPlayerCtx,appid, alias, host,token, deviceid,logLevel);
-	}
-	public synchronized void SetDownloadParams(String ip,String udpport,String tcpport,String httpport,
-								  String streamid,int enablefec,int enablenack,int is_lostpacketStrategy,
-								  int IlostpacketToScreen,int PlostpacketToScreen){
-		native_SetDownloadParams(jniPlayerCtx,ip, udpport, tcpport,httpport,streamid,enablefec,
-				enablenack,is_lostpacketStrategy,IlostpacketToScreen,PlostpacketToScreen);
-	}
-	public synchronized int AdvancedStartPlay(){
-		Log.d(TAG, "AdvancedStartPlay");
-		return native_AdvancedStartPlay(jniPlayerCtx);
-	}
-	public synchronized int AdvancedSetDownloadReportPlayDelay(boolean enalbe){
-		Log.d(TAG, "AdvancedSetDownloadReportPlayDelay");
-		return native_AdvancedSetDownloadReportPlayDelay(jniPlayerCtx,enalbe);
-	}
-
-	public synchronized String GetDownloadIp(){
-		return native_GetDownloadIp(jniPlayerCtx);
-	}
-	public synchronized int GetDownloadUdpPort(){
-		return native_GetDownloadUdpPort(jniPlayerCtx);
-	}
-	public synchronized int GetDownloadTcpPort(){
-		return native_GetDownloadTcpPort(jniPlayerCtx);
-	}
-	public synchronized int GetDownloadHttpPort(){
-		return native_GetDownloadHttpPort(jniPlayerCtx);
-	}
-	public synchronized String GetDownloadStreamId(){
-		return native_GetDownloadStreamId(jniPlayerCtx);
-	}
 	public synchronized int StopPlay(){
 		Log.e(TAG, "StopPlay");
 		mIsPlaying = false;
@@ -174,29 +119,11 @@ public class RtpPlayer {
 	public synchronized boolean isPlaying(){
 		return mIsPlaying;
 	}
-	public synchronized int SetAVMute(int states){
-		Log.d(TAG, "SetAVMute " + "states:"+states);
-		return native_SetAVMute(jniPlayerCtx,states);
+	public synchronized int SetAVMute(boolean mute){
+		Log.d(TAG, "SetAVMute " + "mute:" + mute);
+		return native_SetAVMute(jniPlayerCtx, mute);
 	}
 
-	public synchronized int SetAVMode(int avmode){
-		Log.d(TAG, "SetAVMode " + "avmode:"+avmode);
-		return native_SetAVMode(jniPlayerCtx,avmode);
-	}
-
-	public synchronized float getFramesPerSecond()//帧率
-	{
-		return native_getFramesPerSecond(jniPlayerCtx);
-	}
-
-	public synchronized long getBitRate()//码率
-	{
-		return native_getBitRate(jniPlayerCtx);
-	}
-	public synchronized long getAvgKeyFrameSize()//I帧平均大小
-	{
-		return native_getAvgKeyFrameSize(jniPlayerCtx);
-	}
 	public synchronized boolean snapShot(String var1)
 	{
 		return native_snapShot(jniPlayerCtx,var1);
@@ -214,11 +141,6 @@ public class RtpPlayer {
 
 	public synchronized void pause(){}
 
-	public synchronized String GetLogStat(){
-		Log.d(TAG, "GetLogStat");
-		return native_GetLogStat(jniPlayerCtx);
-	}
-
 	private void CallbackMessageFromNative(int msgid, String content, int wParam, int lParam) {
 		Log.i(TAG, "CallBackMessageFromNative msgid:" + msgid + ", content: " + content);
 
@@ -232,15 +154,9 @@ public class RtpPlayer {
 		}
 	}
 
-
 	public synchronized int SetNetworkChanged(){
 		Log.d(TAG, "SetNetworkChanged");
 		return native_SetNetworkChanged(jniPlayerCtx);
-	}
-
-	public synchronized String getPlaylist(){
-		Log.d(TAG, "getPlaylist");
-		return native_getPlaylist(jniPlayerCtx);
 	}
 
 	public static interface LFLiveCallback{

@@ -442,7 +442,7 @@ namespace live_stream_sdk {
       return;
     }
     m_http_mcu = CHttpFetch::Create(m_ev_base);
-    INF("%s, http url=%d", __FUNCTION__, m_internal_config.upload_url);
+    INF("%s, http url=%s", __FUNCTION__, m_internal_config.upload_url);
     m_http_mcu->Get(m_internal_config.upload_url,
       std::bind(&RTPUploadInternal::OnGetMcuInfoFinish, this,
       std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
@@ -682,8 +682,7 @@ namespace live_stream_sdk {
     if (ret >= 0) {
       memcpy(&stream_id, rsp.streamid, sizeof(StreamId_Ext));
       if (stream_id.unparse() != m_internal_config.streamid) {
-        WRN("upload sdk streamid not match");
-        //sprintf(msg, "upload sdk streamid not match recv %d send %d", stream_id.get_32bit_stream_id(), _stream_info._stream_id.get_32bit_stream_id());
+        WRN("%s, streamid not match", __FUNCTION__);
         return -1;
       }
       if (rsp.result != 0) {
@@ -694,20 +693,21 @@ namespace live_stream_sdk {
         SetState(RtcCaptureState::RTC_CAPTURE_STATE_STOPPED, RtcCaptureStopType::RTC_CAPTURE_STOP_BY_ERROR);
         return -1;
       }
+      INF("%s, received ack.", __FUNCTION__);
     }
     else {
-      INF("not a udp_rsp_pkt, try decode as rtcp ret %d", ret);
+      INF("%s, not a handshake ack, try decode as rtcp ret %d", __FUNCTION__, ret);
       ret = decode_rtcp_u2r_packet(stream_id, &buf);
       if (ret >= 0) {
         if (stream_id.unparse() != m_internal_config.streamid) {
-          WRN("upload sdk streamid not match");
-          //sprintf(msg, "upload sdk streamid not match recv %d send %d", stream_id.get_32bit_stream_id(), _stream_info._stream_id.get_32bit_stream_id());
+          WRN("%s, streamid not match", __FUNCTION__);
           return -1;
         }
       }
       else {
         return -1;
       }
+      INF("%s, received rtcp, ack success.", __FUNCTION__);
     }
 
     SetState(RtcCaptureState::RTC_CAPTURE_STATE_RUNNING);
