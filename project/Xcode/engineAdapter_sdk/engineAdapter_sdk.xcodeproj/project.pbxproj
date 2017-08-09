@@ -31,7 +31,7 @@
 		8392A0221F04D2F400C18FB8 /* libengineAdapter_sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libengineAdapter_sdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8392A0371F04D35400C18FB8 /* LFPlayerEngineAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LFPlayerEngineAdapter.mm; sourceTree = "<group>"; };
 		8392A0441F04D6DE00C18FB8 /* ios_video_render_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ios_video_render_api.h; sourceTree = "<group>"; };
-		B6585BED1F221BDB00B490EA /* LFPlayerEngineAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPlayerEngineAdapter.h; sourceTree = "<group>"; };
+		B6079E7F1F3A9ED500DE3FFC /* LFPlayerEngineAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFPlayerEngineAdapter.h; path = include/LFPlayerEngineAdapter.h; sourceTree = "<group>"; };
 		B6CCAFB41F21B7BC00B17B3E /* LFRTPPlayerCore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LFRTPPlayerCore.mm; sourceTree = "<group>"; };
 		B6CCAFB51F21B7BC00B17B3E /* LFVideoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFVideoItem.m; sourceTree = "<group>"; };
 		B6CCAFBF1F21CDF600B17B3E /* LFPlayerCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFPlayerCore.h; path = include/LFPlayerCore.h; sourceTree = "<group>"; };
@@ -83,7 +83,6 @@
 				83223F941F04E058009C167D /* ReachabilityEngineAdapter.h */,
 				83223F951F04E058009C167D /* ReachabilityEngineAdapter.m */,
 				8392A0441F04D6DE00C18FB8 /* ios_video_render_api.h */,
-				B6585BED1F221BDB00B490EA /* LFPlayerEngineAdapter.h */,
 				8392A0371F04D35400C18FB8 /* LFPlayerEngineAdapter.mm */,
 			);
 			path = engineAdapter_sdk;
@@ -92,6 +91,7 @@
 		B6CCAFBE1F21CDEB00B17B3E /* include */ = {
 			isa = PBXGroup;
 			children = (
+				B6079E7F1F3A9ED500DE3FFC /* LFPlayerEngineAdapter.h */,
 				B6CCAFBF1F21CDF600B17B3E /* LFPlayerCore.h */,
 				B6CCAFC11F21CDF600B17B3E /* LFRTPPlayerCore.h */,
 				B6CCAFC21F21CDF600B17B3E /* LFVideoItem.h */,

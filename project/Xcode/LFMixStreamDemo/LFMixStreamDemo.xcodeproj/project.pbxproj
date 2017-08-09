@@ -25,6 +25,7 @@
 		86C9FA671E12580D003517E3 /* start.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 86C9FA661E12580D003517E3 /* start.jpeg */; };
 		B6079E7B1F38037800DE3FFC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F31BC91D9292BA00DA26FF /* libiconv.tbd */; };
 		B6079E7E1F38129100DE3FFC /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84544F2D1D93878D009BD4EC /* VideoToolbox.framework */; };
+		B6079E821F3AC47A00DE3FFC /* LFSessionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6079E811F3AC47A00DE3FFC /* LFSessionTestView.m */; };
 		B6585BE41F21FC2700B490EA /* libengine_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE31F21FC2700B490EA /* libengine_sdk.a */; };
 		B6585C0D1F22282600B490EA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF812A1D879E5700E6635E /* AVFoundation.framework */; };
 		B6CCAFB11F21B10C00B17B3E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CCAFB01F21B10C00B17B3E /* CoreMedia.framework */; };
@@ -74,6 +75,8 @@
 		84FF81351D87C71600E6635E /* LFLogTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogTestView.h; sourceTree = "<group>"; };
 		84FF81361D87C71600E6635E /* LFLogTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogTestView.m; sourceTree = "<group>"; };
 		86C9FA661E12580D003517E3 /* start.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = start.jpeg; sourceTree = "<group>"; };
+		B6079E801F3AC47A00DE3FFC /* LFSessionTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFSessionTestView.h; sourceTree = "<group>"; };
+		B6079E811F3AC47A00DE3FFC /* LFSessionTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSessionTestView.m; sourceTree = "<group>"; };
 		B6585BE31F21FC2700B490EA /* libengine_sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libengine_sdk.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/LFMixStreamDemo-fvsxwtxfzdlyavgmvqnubgikcsfd/Build/Products/Debug-iphoneos/libengine_sdk.a"; sourceTree = "<group>"; };
 		B6CCAFAD1F21B06B00B17B3E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		B6CCAFB01F21B10C00B17B3E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -160,6 +163,8 @@
 		844BCB921D86D72E00CC357C /* LFMixStreamDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B6079E801F3AC47A00DE3FFC /* LFSessionTestView.h */,
+				B6079E811F3AC47A00DE3FFC /* LFSessionTestView.m */,
 				844BCB961D86D72E00CC357C /* AppDelegate.h */,
 				844BCB971D86D72E00CC357C /* AppDelegate.m */,
 				F84A63581E9BBE9300049C9E /* MainViewController.h */,
@@ -360,6 +365,7 @@
 				844BCB9B1D86D72E00CC357C /* ViewController.m in Sources */,
 				84FF81371D87C71600E6635E /* LFLogTestView.m in Sources */,
 				844BCB981D86D72E00CC357C /* AppDelegate.m in Sources */,
+				B6079E821F3AC47A00DE3FFC /* LFSessionTestView.m in Sources */,
 				F84F38D31E9C76FA00F4ABDF /* InitViewController.m in Sources */,
 				84FF810C1D87932C00E6635E /* LFPlayerTestView.m in Sources */,
 				844BCB951D86D72E00CC357C /* main.m in Sources */,

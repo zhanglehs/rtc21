@@ -1,4 +1,4 @@
-﻿1. engineAdapter_sdk工程
+1. engineAdapter_sdk工程
     该工程的目的是将engine_sdk的c++的播放器接口重新封装成oc类。
 include             // 该目录是对外接口，即整个sdk的最终对外输出。
   LFPlayerCore.h    // 来疯app中集成了多种播放器，为这些播放器制定了统一的接口
@@ -15,7 +15,7 @@ LFPlayerEngineAdapter.mm     // 对engine_sdk的封装，主要是对render创�
 2. LFMixStreamDemo工程
 InitViewController.h     // 九宫格View
 InitViewController.m
-ViewController.h         // 上下界面
+ViewController.h         // 上下播界面
 ViewController.m
 LFLogTestView.h          // 播放界面的log打印信息View
 LFLogTestView.m

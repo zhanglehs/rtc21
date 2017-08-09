@@ -6,11 +6,12 @@
 //  Copyright © 2016年 admin. All rights reserved.
 //
 
-#import "LFPlayerEngineAdapter.h"
+#import "include/LFPlayerEngineAdapter.h"
 #import "rtp_api.h"
 #import "ios_video_render_api.h"
 #import "RtcLog.h"
 #import "RtcPlayer.h"
+#import "RtcCapture.h"
 #import "ReachabilityEngineAdapter.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -255,4 +256,178 @@ static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, lon
 {
 }
 
+@end
+
+
+/////////////////
+
+@implementation rtcOcCaptureConfig
+-(id _Nonnull)init
+{
+    self = [super init];
+    if (self) {
+        _audio_deviceid = @"";
+        _audio_frequence = 48000;
+        _video_deviceid = @"";
+        _video_capture_width = 640;
+        _video_capture_height = 480;
+    }
+    return self;
+}
+@end
+
+@implementation rtcOcEncodeConfig
+-(id _Nonnull)init
+{
+    self = [super init];
+    if (self) {
+        _video_encode_width = 360;
+        _video_encode_height = 640;
+        _video_max_fps = 15;
+        _video_gop = 15;
+        _video_mtu_size = 1200;
+        _video_bitrate = 800 * 1024;
+    }
+    return self;
+}
+@end
+
+@implementation rtcOcNetworkConfig
+@end
+
+@interface rtcCaptureAdapter ()
+@property (nonatomic, strong) UIView *mVideoView;
+@property (nonatomic, assign) void *mVideoHnd;
+//@property (nonatomic, strong) ReachabilityEngineAdapter *mNetReachability;
+@property (nonatomic, assign) RtcCapture *mCapture;
+@end
+
+@implementation rtcCaptureAdapter
+-(id _Nonnull)initWith:(const CGSize* _Nonnull)size
+{
+    self = [super init];
+    if (self) {
+        _mCapture = new RtcCapture("xxxdeviceid_iosxxx");
+        _mCapture->SetUserdata((__bridge void*)self);
+
+        void *viewHnd = NULL;
+        int scale = [UIScreen mainScreen].scale;
+        void *videoHandle = lfrtcCreateIosVideoRender(65535,
+                                                      CGRectMake(0, 0, size->width, size->height),scale,NULL, &viewHnd);
+        _mVideoView = (__bridge UIView*)videoHandle;
+        _mVideoHnd = viewHnd;
+        UIApplicationState state = [UIApplication sharedApplication].applicationState;
+        if(self.mVideoHnd && (UIApplicationStateActive != state)) {
+            CREATE_VIDEO_RENDER_PAUSE(self.mVideoHnd, true);
+        }
+        _mVideoView.backgroundColor = [UIColor blackColor];
+        _mVideoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:UIApplicationWillTerminateNotification object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _mCapture->Stop();
+    lfrtcDestroyIosVideoRender(_mVideoHnd);
+    delete _mCapture;
+}
+
+-(nullable UIView*)renderView
+{
+    return _mVideoView;
+}
+
+-(int)startCapture:(rtcOcCaptureConfig* _Nullable)config
+{
+    lfrtcCaptureConfig capture_config;
+    if(config){
+        if (config.audio_deviceid) {
+            strcpy(capture_config.audio_deviceid, [config.audio_deviceid UTF8String]);
+        }
+        capture_config.audio_frequence = config.audio_frequence;
+        if (config.video_deviceid) {
+            strcpy(capture_config.video_deviceid, [config.video_deviceid UTF8String]);
+        }
+        capture_config.video_capture_width = config.video_capture_width;
+        capture_config.video_capture_height = config.video_capture_height;
+    }
+    return _mCapture->StartCapture(&capture_config);
+}
+
+-(int)StartPreview
+{
+    return _mCapture->StartPreview(_mVideoHnd);
+}
+
+-(int)StartEncode:(rtcOcEncodeConfig* _Nullable)encode AndSend:(rtcOcNetworkConfig* _Nonnull)net
+{
+    if (net == nil || net.lapi == nil || net.appid == nil || net.alias == nil || net.token == nil) {
+        return -1;
+    }
+    RtcCapture::NetworkConfig net_config;
+    strcpy(net_config.lapi, [net.lapi UTF8String]);
+    strcpy(net_config.appid, [net.appid UTF8String]);
+    strcpy(net_config.alias, [net.alias UTF8String]);
+    strcpy(net_config.token, [net.token UTF8String]);
+    lfrtcEncodeConfig encode_config;
+    if (encode) {
+        encode_config.video_encode_width = encode.video_encode_width;
+        encode_config.video_encode_height = encode.video_encode_height;
+        encode_config.video_max_fps = encode.video_max_fps;
+        encode_config.video_gop = encode.video_gop;
+        encode_config.video_mtu_size = encode.video_mtu_size;
+        encode_config.video_bitrate = encode.video_bitrate;
+    }
+    return _mCapture->StartEncodeAndSend(&net_config, &encode_config);
+}
+
+-(void)StopEncodeAndSend
+{
+    _mCapture->StopEncodeAndSend();
+}
+
+-(void)StopPreview
+{
+    _mCapture->StopPreview();
+}
+
+-(void)Stop
+{
+    _mCapture->Stop();
+}
+
+#pragma mark -- application
+- (void)applicationWillEnterForeground
+{
+}
+
+- (void)applicationDidBecomeActive
+{
+    if (self.mVideoHnd){
+        CREATE_VIDEO_RENDER_PAUSE(self.mVideoHnd, false);
+    }
+}
+
+- (void)applicationWillResignActive
+{
+    if (self.mVideoHnd){
+        CREATE_VIDEO_RENDER_PAUSE(self.mVideoHnd,true);
+    }
+}
+
+- (void)applicationDidEnterBackground
+{
+}
+
+- (void)applicationWillTerminate
+{
+}
 @end
