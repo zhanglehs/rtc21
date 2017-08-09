@@ -10,7 +10,6 @@
 #import <YYKit/YYKit.h>
 #import "LFPlayerTestView.h"
 #import "../../engineAdapter_sdk/engineAdapter_sdk/include/LFRTPPlayerCore.h"
-#import "LFLogTestView.h"
 #import <YYKit/YYReachability.h>
 
 

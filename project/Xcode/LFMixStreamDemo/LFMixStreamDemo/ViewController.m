@@ -12,7 +12,6 @@
 #import "LFPlayerTestView.h"
 #import "../../engineAdapter_sdk/engineAdapter_sdk/include/LFRTPPlayerCore.h"
 #import "../../engineAdapter_sdk/engineAdapter_sdk/include/LFPlayerEngineAdapter.h"
-#import "LFLogTestView.h"
 #import <YYKit/YYReachability.h>
 #import <AdSupport/ASIdentifierManager.h>
 
@@ -25,7 +24,6 @@
 @property (nonatomic, strong) UIView *playerView;
 @property (nonatomic, strong) LFSessionTestView *sessionTestView;
 @property (nonatomic, strong) LFPlayerTestView *playerTestView;
-@property (nonatomic, strong) LFLogTestView *logView;
 @property (nonatomic, strong) id<LFPlayerCore> player;
 #ifdef MULTIPLAYER
 @property (nonatomic, strong) id<LFPlayerCore> player2;
@@ -41,26 +39,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGSize capture_size = self.view.bounds.size;
-    capture_size.width /=2;
-    capture_size.height /=2;
-    _capturer = [[rtcCaptureAdapter alloc] initWith:&capture_size];
-    UIView *capture_view = [_capturer renderView];
-    [capture_view setHidden:TRUE];
-    
     [self.view addSubview:self.playerView];
 #ifdef MULTIPLAYER
     [self.view addSubview:self.player2View];
 #endif
-    [self.view addSubview:self.logView];
     [self.view addSubview:self.cameraButton];
     [self.view addSubview:self.logButton];
-    [self.view addSubview:capture_view];
     [self.view addSubview:self.sessionTestView];
     [self.view addSubview:self.playerTestView];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
     self.view.backgroundColor = [UIColor grayColor];
+    
+    CGSize capture_size = self.view.bounds.size;
+    _capturer = [[rtcCaptureAdapter alloc] initWith:&capture_size];
+    UIView *capture_view = [_capturer renderView];
+    [capture_view setHidden:TRUE];
+    [self.view addSubview:capture_view];
+    [self.view sendSubviewToBack:capture_view];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -120,13 +116,8 @@
                 if(self.sessionTestView.left == 0) self.sessionTestView.left = self.view.width * -1;
                 else self.sessionTestView.left = 0;
             }];
-            //if(self.isLiving) {
-            //    [self.session stopLive];
-            //    [self.sessionTestView destroyStream:self.sessionTestView.appid alias:self.sessionTestView.alias urlHost:self.sessionTestView.host];
-            //    self.session = nil;
-            //}
+            [self.capturer Stop];
             [self.leftButton setTitle:@"开播" forState:UIControlStateNormal];
-            //self.isLiving = NO;
         }];
         [_leftButton setBackgroundColor:[UIColor greenColor]];
     }
@@ -181,11 +172,6 @@
         _logButton.right = self.rightButton.left - 40;
         _logButton.top = 30;
         [_logButton setTitle:@"Log" forState:UIControlStateNormal];
-        @weakify(self)
-        [_logButton addBlockForControlEvents:UIControlEventTouchUpInside block:^(id sender) {
-            @strongify(self)
-            self.logView.hidden = !self.logView.hidden;
-        }];
     }
     return _logButton;
 }
@@ -224,9 +210,8 @@
                 self.sessionTestView.left = self.view.width * -1;
             }];
             
-            
-            int ret = [self.capturer startCapture:nil];
-            ret = [self.capturer StartPreview];
+            [self.capturer startCapture:nil];
+            [self.capturer StartPreview];
             [[self.capturer renderView] setHidden:FALSE];
             
             rtcOcNetworkConfig *net = [[rtcOcNetworkConfig alloc] init];
@@ -243,80 +228,6 @@
 #endif
             [self.leftButton setTitle:@"停止" forState:UIControlStateNormal];
         };
-#if 0
-        _sessionTestView.rtpInitBlock = ^(NSString *appid , NSString *alias, NSString *url, int logLevel){
-            @strongify(self)
-            LFRtpLiveStreamInfo *info = [LFRtpLiveStreamInfo new];
-            info.appId = appid;
-            info.alias = alias;
-            info.url = url;
-            info.token = @"98765";
-            info.logLevel = 0;
-            info.uid = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-            self.playerTestView.appid = appid;
-            self.playerTestView.alias = alias;
-            LiveRtpConstant *globalInfo = [self globalinfoSetting];
-            globalInfo.UPLOAD_CONNECT_TIMEOUT_MS = 300*1000;
-            globalInfo.UPLOAD_RECONNECT_TIMEOUT_MS = 600*1000;
-            [self.session updateGlobalInfo:globalInfo];
-            return [self.session initLive:info];
-        };
-
-        _sessionTestView.rtpStartBlockWithExtraParams = ^(NSString *uploadIp, NSString *uploadUdpPort,NSString *uploadTcpPort,NSString *uploadHttpPort,NSString *uploadStreamId,NSString *mtusize,NSString *enablefec,NSString *enablenack){
-            @strongify(self)
-            [UIView animateWithDuration:0.3 animations:^{
-                self.sessionTestView.left = self.view.width * -1;
-            }];
-            [self.session setUploadParams:uploadIp
-                                  udpport:uploadUdpPort
-                                  tcpport:uploadTcpPort
-                                 httpport:uploadHttpPort
-                                 streamid:uploadStreamId
-                                  mtusize:[mtusize intValue]
-                                enablefec:[enablefec intValue]
-                               enablenack:[enablenack intValue]];
-            BOOL ret = [self.session startLiveWithParams];
-            if(ret == YES) {
-                [self.leftButton setTitle:@"停止" forState:UIControlStateNormal];
-                self.isLiving = YES;
-            }
-        };
-        _sessionTestView.getUploadIp = ^ (void) {
-            @strongify(self)
-            if([self.session isKindOfClass:[LFRtpSession class]]){
-                return [self.session getUploadIp];
-            }
-            return @"";
-        };
-        _sessionTestView.getUploadUdpPort = ^ (void) {
-            @strongify(self)
-            if([self.session isKindOfClass:[LFRtpSession class]]){
-                return [self.session getUploadUdpPort];
-            }
-            return 0;
-        };
-        _sessionTestView.getUploadTcpPort = ^ (void) {
-            @strongify(self)
-            if([self.session isKindOfClass:[LFRtpSession class]]){
-                return [self.session getUploadTcpPort];
-            }
-            return 0;
-        };
-        _sessionTestView.getUploadHttpPort = ^ (void) {
-            @strongify(self)
-            if([self.session isKindOfClass:[LFRtpSession class]]){
-                return [self.session getUploadHttpPort];
-            }
-            return 0;
-        };
-        _sessionTestView.getUploadStreamId = ^ (void) {
-            @strongify(self)
-            if([self.session isKindOfClass:[LFRtpSession class]]){
-                return [self.session getUploadStreamId];
-            }
-            return @"";
-        };
-#endif
     }
     return _sessionTestView;
 }
@@ -340,13 +251,6 @@
         };
     }
     return _playerTestView;
-}
-
-- (LFLogTestView*)logView{
-    if(!_logView){
-        _logView = [[LFLogTestView alloc] initWithFrame:self.view.bounds];
-    }
-    return _logView;
 }
 
 - (void)resize:(CGSize)size{

@@ -386,6 +386,16 @@ static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, lon
         encode_config.video_mtu_size = encode.video_mtu_size;
         encode_config.video_bitrate = encode.video_bitrate;
     }
+
+    // INFO: zhangle, create stream is test code
+    char streamid[256] = { 0 };
+    char url[1024];
+    sprintf(url, "http://%s/v1/create_stream?app_id=%s&alias=%s&stream_type=rtp&res=%dx%d&rt=400&stream_format=rtp&nt=1&token=98765&p2p=0",
+               net_config.lapi, net_config.appid, net_config.alias, encode_config.video_encode_width, encode_config.video_encode_height);
+    INF("%s, create stream, url=%s", __FUNCTION__, url);
+    create_stream_sync(streamid, url);
+    INF("%s, create stream finished", __FUNCTION__);
+
     return _mCapture->StartEncodeAndSend(&net_config, &encode_config);
 }
 

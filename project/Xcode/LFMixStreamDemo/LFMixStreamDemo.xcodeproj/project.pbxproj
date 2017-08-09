@@ -21,7 +21,6 @@
 		84FF810C1D87932C00E6635E /* LFPlayerTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF810B1D87932C00E6635E /* LFPlayerTestView.m */; };
 		84FF81331D87C69F00E6635E /* camra_preview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FF81311D87C69F00E6635E /* camra_preview@2x.png */; };
 		84FF81341D87C69F00E6635E /* camra_preview@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FF81321D87C69F00E6635E /* camra_preview@3x.png */; };
-		84FF81371D87C71600E6635E /* LFLogTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF81361D87C71600E6635E /* LFLogTestView.m */; };
 		86C9FA671E12580D003517E3 /* start.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 86C9FA661E12580D003517E3 /* start.jpeg */; };
 		B6079E7B1F38037800DE3FFC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F31BC91D9292BA00DA26FF /* libiconv.tbd */; };
 		B6079E7E1F38129100DE3FFC /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84544F2D1D93878D009BD4EC /* VideoToolbox.framework */; };
@@ -72,8 +71,6 @@
 		84FF812A1D879E5700E6635E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		84FF81311D87C69F00E6635E /* camra_preview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camra_preview@2x.png"; sourceTree = "<group>"; };
 		84FF81321D87C69F00E6635E /* camra_preview@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camra_preview@3x.png"; sourceTree = "<group>"; };
-		84FF81351D87C71600E6635E /* LFLogTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLogTestView.h; sourceTree = "<group>"; };
-		84FF81361D87C71600E6635E /* LFLogTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLogTestView.m; sourceTree = "<group>"; };
 		86C9FA661E12580D003517E3 /* start.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = start.jpeg; sourceTree = "<group>"; };
 		B6079E801F3AC47A00DE3FFC /* LFSessionTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFSessionTestView.h; sourceTree = "<group>"; };
 		B6079E811F3AC47A00DE3FFC /* LFSessionTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSessionTestView.m; sourceTree = "<group>"; };
@@ -175,8 +172,6 @@
 				837BCCCA1EBDEDF000F2F27E /* PlayerDelegate.m */,
 				844BCB991D86D72E00CC357C /* ViewController.h */,
 				844BCB9A1D86D72E00CC357C /* ViewController.m */,
-				84FF81351D87C71600E6635E /* LFLogTestView.h */,
-				84FF81361D87C71600E6635E /* LFLogTestView.m */,
 				84FF810A1D87932C00E6635E /* LFPlayerTestView.h */,
 				84FF810B1D87932C00E6635E /* LFPlayerTestView.m */,
 				844BCB9C1D86D72E00CC357C /* Main.storyboard */,
@@ -363,7 +358,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				844BCB9B1D86D72E00CC357C /* ViewController.m in Sources */,
-				84FF81371D87C71600E6635E /* LFLogTestView.m in Sources */,
 				844BCB981D86D72E00CC357C /* AppDelegate.m in Sources */,
 				B6079E821F3AC47A00DE3FFC /* LFSessionTestView.m in Sources */,
 				F84F38D31E9C76FA00F4ABDF /* InitViewController.m in Sources */,
