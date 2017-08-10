@@ -6,33 +6,27 @@
 //  Copyright © 2016年 admin. All rights reserved.
 //
 
-#import "LFPlayerTestView.h"
+#import "LFPlayerSettingView.h"
 #import <YYKit/YYKit.h>
 
-@interface LFPlayerTestView ()<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
+@interface LFPlayerSettingView ()<UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UITextView *urlTextView;
 @property (nonatomic, strong) UITextField *appIdTextFiled;
 @property (nonatomic, strong) UITextField *aliasTextFiled;
 @property (nonatomic, strong) UITextField *logTextFiled;
-#ifdef MULTIPLAYER
-@property (nonatomic, strong) UITextField *alias2TextFiled;
-#endif
 @property (nonatomic, strong) UITextField *urlTextFiled;
 @property (nonatomic, strong) UIButton *startRtpButton;
 
 @end
 
-@implementation LFPlayerTestView
+@implementation LFPlayerSettingView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){
         [self addSubview:self.appIdTextFiled];
         [self addSubview:self.aliasTextFiled];
         [self addSubview:self.logTextFiled];
-#ifdef MULTIPLAYER
-        [self addSubview:self.alias2TextFiled];
-#endif
         [self addSubview:self.urlTextFiled];
         [self addSubview:self.startRtpButton];
 
@@ -84,39 +78,6 @@
     _appIdTextFiled.text = appid;
 }
 
-- (NSString*)url{
-    return self.urlTextView.text;
-}
-
-- (NSString*)appid{
-    return self.appIdTextFiled.text;
-}
-
-- (NSString*)alias{
-    return self.aliasTextFiled.text;
-}
-- (NSString*)hosturl{
-    return self.urlTextFiled.text;
-}
-
-- (int)logLevel{
-    int loglevel = 0;
-    if ([self.logTextFiled.text isEqualToString:@"CLIENT-NON"] == YES)
-        loglevel = 1;
-    else if ([self.logTextFiled.text isEqualToString:@"CLIENT-RTP"] == YES)
-        loglevel = 2;
-    return loglevel;
-}
-
-#ifdef MULTIPLAYER
-- (void)setAlias2:(NSString *)alias{
-    _alias2TextFiled.text = alias;
-}
-- (NSString*)alias2{
-    return self.alias2TextFiled.text;
-}
-#endif
-
 - (UITextField*)urlTextFiled{
     if(!_urlTextFiled){
         _urlTextFiled = [UITextField new];
@@ -128,7 +89,6 @@
         _urlTextFiled.backgroundColor = [UIColor whiteColor];
         _urlTextFiled.returnKeyType = UIReturnKeyDone;
         _urlTextFiled.delegate = self;
-        //_urlTextFiled.text = @"v.laifeng.com/join_demo";
         _urlTextFiled.text = @"101.201.57.242";
         
         _urlTextFiled.rightViewMode = UITextFieldViewModeAlways;
@@ -207,33 +167,11 @@
     return _logTextFiled;
 }
 
-#ifdef MULTIPLAYER
-- (UITextField*)alias2TextFiled{
-    if(!_alias2TextFiled){
-        _alias2TextFiled = [UITextField new];
-        _alias2TextFiled.size = CGSizeMake(300, 40);
-        _alias2TextFiled.top = self.aliasTextFiled.bottom + 10;
-        _alias2TextFiled.centerX = kScreenWidth/2;;
-        _alias2TextFiled.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        _alias2TextFiled.placeholder = @"请输入alias";
-        _alias2TextFiled.backgroundColor = [UIColor whiteColor];
-        _alias2TextFiled.returnKeyType = UIReturnKeyDone;
-        _alias2TextFiled.delegate = self;
-        _alias2TextFiled.text = @"";
-    }
-    return _alias2TextFiled;
-}
-#endif
-
 - (UIButton*)startRtpButton{
     if(!_startRtpButton){
         _startRtpButton = [UIButton new];
         _startRtpButton.size = CGSizeMake(300, 40);
-#ifdef MULTIPLAYER
-        _startRtpButton.top = self.alias2TextFiled.bottom + 10;
-#else
         _startRtpButton.top = self.logTextFiled.bottom + 10;
-#endif
         _startRtpButton.centerX = self.centerX;
         _startRtpButton.backgroundColor = [UIColor whiteColor];
         [_startRtpButton setTitle:@"播放（普通模式）" forState:UIControlStateNormal];
@@ -245,14 +183,16 @@
             @strongify(self)
             [self endEditing:YES];
             NSUserDefaults *mNsUserDefaults = [NSUserDefaults standardUserDefaults];
-            [mNsUserDefaults setValue:self.alias forKey:@"playalias"];
+            [mNsUserDefaults setValue:self.aliasTextFiled.text forKey:@"playalias"];
             [mNsUserDefaults synchronize];
             int loglevel = 0;
             if ([self.logTextFiled.text isEqualToString:@"CLIENT-NON"] == YES)
                 loglevel = 1;
             else if ([self.logTextFiled.text isEqualToString:@"CLIENT-RTP"] == YES)
                 loglevel = 2;
-            if(self.startRtpBlock) self.startRtpBlock(self.appid,self.alias,self.hosturl,loglevel);
+            if(self.startRtpBlock) {
+                self.startRtpBlock(self.appIdTextFiled.text, self.aliasTextFiled.text, self.urlTextFiled.text, loglevel);
+            }
         }];
     }
     return _startRtpButton;

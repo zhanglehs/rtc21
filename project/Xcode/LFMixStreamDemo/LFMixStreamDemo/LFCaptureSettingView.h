@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LFSessionTestView : UIScrollView
+@interface LFCaptureSettingView : UIScrollView
 
 @property (nonatomic, copy) void(^rtpStartBlock)(NSString *appid , NSString *alias, NSString *url, int logLevel);
 

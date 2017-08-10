@@ -15,49 +15,46 @@
 #import "ReachabilityEngineAdapter.h"
 #import <AVFoundation/AVFoundation.h>
 
-@implementation LFRtpPlayerParam
-@end
-
-@interface LFPlayerEngineAdapter ()
-@property (nonatomic, strong) LFRtpPlayerParam *mPlayerParam;
+@interface rtcPlayerAdapter ()
 @property (nonatomic, strong) UIView *mVideoView;
 @property (nonatomic, assign) void *mVideoHnd;
 @property (nonatomic, strong) ReachabilityEngineAdapter *mNetReachability;
 @property (nonatomic, assign) RtcPlayer *mPlayer;
+@property (nonatomic, weak) id<rtcPlayerEventDelegate> _Nullable mDelegate;
 @end
 
-@implementation LFPlayerEngineAdapter
+@implementation rtcPlayerAdapter
     
--(int)init:(LFRtpPlayerParam *)param
+-(id _Nonnull)init
 {
-    _mPlayerParam = param;
-    
-    void *viewHnd = NULL;
-    int scale = [UIScreen mainScreen].scale;
-    void *videoHandle = lfrtcCreateIosVideoRender(65535,
-        CGRectMake(0, 0, _mPlayerParam.videoSize.width, _mPlayerParam.videoSize.height),scale,NULL, &viewHnd);
-    _mVideoView = (__bridge UIView*)videoHandle;
-    self.mVideoHnd = viewHnd;
-    UIApplicationState state = [UIApplication sharedApplication].applicationState;
-    if(self.mVideoHnd && (UIApplicationStateActive != state)) {
-        CREATE_VIDEO_RENDER_PAUSE(self.mVideoHnd,true);
-    }
-    _mVideoView.backgroundColor = [UIColor blackColor];
-    _mVideoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    _mPlayer = new RtcPlayer("xxxdeviceid_iosxxx");
-    _mPlayer->SetUserdata((__bridge void*)self);
-    
-    [self installNotifications];
-    
-    _mNetReachability = [ReachabilityEngineAdapter reachabilityForInternetConnection];
-    _mNetReachability.reachableBlock = ^(ReachabilityEngineAdapter * ){
-        if([_mNetReachability isReachable]){
-            _mPlayer->SetNetworkChanged();
+    self = [super init];
+    if (self) {
+        void *viewHnd = NULL;
+        int scale = [UIScreen mainScreen].scale;
+        void *videoHandle = lfrtcCreateIosVideoRender(65535,
+                                                      CGRectMake(0, 0, 360, 640),scale,NULL, &viewHnd);
+        _mVideoView = (__bridge UIView*)videoHandle;
+        self.mVideoHnd = viewHnd;
+        UIApplicationState state = [UIApplication sharedApplication].applicationState;
+        if(self.mVideoHnd && (UIApplicationStateActive != state)) {
+            CREATE_VIDEO_RENDER_PAUSE(self.mVideoHnd,true);
         }
-    };
-    
-    return 0;
+        _mVideoView.backgroundColor = [UIColor blackColor];
+        _mVideoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        _mPlayer = new RtcPlayer("xxxdeviceid_iosxxx");
+        _mPlayer->SetUserdata((__bridge void*)self);
+        
+        [self installNotifications];
+        
+        _mNetReachability = [ReachabilityEngineAdapter reachabilityForInternetConnection];
+        _mNetReachability.reachableBlock = ^(ReachabilityEngineAdapter * ){
+            if([_mNetReachability isReachable]){
+                _mPlayer->SetNetworkChanged();
+            }
+        };
+    }
+    return self;
 }
 
 -(int)uninit
@@ -72,23 +69,21 @@
     return 0;
 }
 
--(int)startPlay
+-(int)startPlay:(rtcOcNetworkConfig* _Nullable)net
 {
-    if(self.mDelegate && [self.mDelegate respondsToSelector:@selector(onPlayerStartLoading:msg:)]){
-        [self.mDelegate onPlayerStartLoading:0 msg:@"播放初始中"];
-    }
-    
-    if(_mPlayerParam && _mPlayerParam.appId && _mPlayerParam.alias && _mPlayerParam.token){
+    if (net && net.lapi && net.appid && net.alias && net.token) {
         RtcPlayer::NetworkConfig config;
-        strcpy(config.alias, [_mPlayerParam.alias UTF8String]);
-        strcpy(config.appid, [_mPlayerParam.appId UTF8String]);
-        strcpy(config.lapi, [_mPlayerParam.lapiUrl UTF8String]);
-        strcpy(config.token, [_mPlayerParam.token UTF8String]);
-        _mPlayer->Start(&config, eventNotifyRTPOnState);
-        _mPlayer->SetWindow(self.mVideoHnd);
-        [_mNetReachability startNotifier];
+        strcpy(config.alias, [net.alias UTF8String]);
+        strcpy(config.appid, [net.appid UTF8String]);
+        strcpy(config.lapi, [net.lapi UTF8String]);
+        strcpy(config.token, [net.token UTF8String]);
+        if (_mPlayer->Start(&config, eventNotifyRTPOnState) >= 0
+            && _mPlayer->SetWindow(self.mVideoHnd) >= 0) {
+            [_mNetReachability startNotifier];
+            return 0;
+        }
     }
-    return 0;
+    return -1;
 }
 
 -(int)stopPlay
@@ -108,7 +103,7 @@
     return 0;
 }
 
--(int)setPlayerEventListenerDelegate:(id< LFRtpPlayerEventDelegate > _Nullable)delegate
+-(int)setEventDelegate:(id<rtcPlayerEventDelegate> _Nullable)delegate
 {
     _mDelegate = delegate;
     return 0;
@@ -146,30 +141,32 @@
     return 0;
 }
 
-- (void)dealloc
+-(void)dealloc
 {
     [self uninit];
 }
 
 static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, long lParam) {
     NSLog(@"message_callback msgid: %d, %d, %d\n",msgid, (int)wParam, (int)lParam);
-    LFPlayerEngineAdapter *playerEngine = (__bridge LFPlayerEngineAdapter*)player->GetUserdata();
-    if (playerEngine && playerEngine.mDelegate && [playerEngine.mDelegate respondsToSelector:@selector(onPlayerError:msg:)]){
-        if (msgid == RTC_PLAYER_STATE_ERROR) {
-            [playerEngine.mDelegate onPlayerError:msgid
-                                               msg:@"播放错误"];
-        }
-        else if (msgid == RTC_PLAYER_MSG_VIDEO_RESOLUTION) {
-            [playerEngine.mDelegate onPlayerDecodeVideoSize:(int)wParam
-                                                     height:(int)lParam];
-        }
-        else if (msgid == RTC_PLAYER_STATE_INITIALIZING) {
-            [playerEngine.mDelegate onPlayerStartLoading:msgid
-                                                msg:@"播放初始中"];
-        }
-        else if (msgid == RTC_PLAYER_MSG_VIDEO_FIRST_FRAME) {
-            [playerEngine.mDelegate onPlayerFirstPicture:msgid
-                                                     msg:@"视频首帧出现"];
+    
+    rtcPlayerAdapter *pThis = (__bridge rtcPlayerAdapter*)(player->GetUserdata());
+    id<rtcPlayerEventDelegate> delegate = pThis.mDelegate;
+    if (delegate == nil) {
+        return;
+    }
+    
+    switch (msgid) {
+        case RTC_PLAYER_MSG_VIDEO_RESOLUTION:
+            if ([delegate respondsToSelector:@selector(onPlayerVideoWidth:AndHeight:)]) {
+                [delegate onPlayerVideoWidth:(int)wParam AndHeight:(int)lParam];
+            }
+            break;
+        case RTC_PLAYER_MSG_VIDEO_FIRST_FRAME:
+            if ([delegate respondsToSelector:@selector(onPlayerFirstPicture)]) {
+                [delegate onPlayerFirstPicture];
+            }
+            
+            // TODO: zhangle, should be first audio
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 if([[AVAudioSession sharedInstance] respondsToSelector:@selector(setCategory:mode:options:error:)]){
                     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord
@@ -187,7 +184,30 @@ static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, lon
                     [[AVAudioSession sharedInstance] setActive:YES error:nil];
                 }
             });
-        }
+            break;
+        case RTC_PLAYER_STATE_INITIALIZING:
+            if ([delegate respondsToSelector:@selector(onPlayerStateInitializing)]) {
+                [delegate onPlayerStateInitializing];
+            }
+            break;
+        case RTC_PLAYER_STATE_RUNNING:
+            if ([delegate respondsToSelector:@selector(onPlayerStatePlaying)]) {
+                [delegate onPlayerStatePlaying];
+            }
+            break;
+        case RTC_PLAYER_STATE_ERROR:
+            if ([delegate respondsToSelector:@selector(onPlayerStateRetry)]) {
+                [delegate onPlayerStateRetry];
+            }
+            break;
+        case RTC_PLAYER_STATE_STOPPED:
+            if (lParam == RTC_PLAYER_STOP_BY_ERROR && [delegate respondsToSelector:@selector(onPlayerStateError)]) {
+                [delegate onPlayerStateError];
+            }
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -303,7 +323,7 @@ static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, lon
 @end
 
 @implementation rtcCaptureAdapter
--(id _Nonnull)initWith:(const CGSize* _Nonnull)size
+-(id _Nonnull)init
 {
     self = [super init];
     if (self) {
@@ -313,7 +333,7 @@ static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, lon
         void *viewHnd = NULL;
         int scale = [UIScreen mainScreen].scale;
         void *videoHandle = lfrtcCreateIosVideoRender(65535,
-                                                      CGRectMake(0, 0, size->width, size->height),scale,NULL, &viewHnd);
+                                                      CGRectMake(0, 0, 360, 640),scale,NULL, &viewHnd);
         _mVideoView = (__bridge UIView*)videoHandle;
         _mVideoHnd = viewHnd;
         UIApplicationState state = [UIApplication sharedApplication].applicationState;
@@ -323,11 +343,16 @@ static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, lon
         _mVideoView.backgroundColor = [UIColor blackColor];
         _mVideoView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:UIApplicationWillTerminateNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground)
+                                                     name:UIApplicationWillEnterForegroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive)
+                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive)
+                                                     name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground)
+                                                     name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate)
+                                                     name:UIApplicationWillTerminateNotification object:nil];
     }
     return self;
 }

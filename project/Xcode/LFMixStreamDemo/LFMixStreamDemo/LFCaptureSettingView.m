@@ -6,10 +6,10 @@
 //  Copyright © 2016年 admin. All rights reserved.
 //
 
-#import "LFSessionTestView.h"
+#import "LFCaptureSettingView.h"
 #import <YYKit/YYKit.h>
 
-@interface LFSessionTestView ()<UITextFieldDelegate,UIActionSheetDelegate>
+@interface LFCaptureSettingView ()<UITextFieldDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UITextField *appIdTextFiled;
 @property (nonatomic, strong) UITextField *aliasTextFiled;
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UITextField *bpsTextFiled;
 @end
 
-@implementation LFSessionTestView
+@implementation LFCaptureSettingView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if(self = [super initWithFrame:frame]){

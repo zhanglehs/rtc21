@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		51BA0FD6693946012146EF3C /* libPods-LFMixStreamDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 827BDB57E20762BF73CEB82F /* libPods-LFMixStreamDemo.a */; };
-		837BCCCB1EBDEDF000F2F27E /* PlayerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 837BCCCA1EBDEDF000F2F27E /* PlayerDelegate.m */; };
 		844BCB951D86D72E00CC357C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCB941D86D72E00CC357C /* main.m */; };
 		844BCB981D86D72E00CC357C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCB971D86D72E00CC357C /* AppDelegate.m */; };
 		844BCB9B1D86D72E00CC357C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCB9A1D86D72E00CC357C /* ViewController.m */; };
@@ -18,15 +17,15 @@
 		84F746171D93A72800A30F00 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF811D1D879C7500E6635E /* libstdc++.tbd */; };
 		84F746181D93A72D00A30F00 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F31BB81D92853B00DA26FF /* GLKit.framework */; };
 		84F746191D93A73700A30F00 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF811B1D879C6E00E6635E /* libresolv.tbd */; };
-		84FF810C1D87932C00E6635E /* LFPlayerTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF810B1D87932C00E6635E /* LFPlayerTestView.m */; };
 		84FF81331D87C69F00E6635E /* camra_preview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FF81311D87C69F00E6635E /* camra_preview@2x.png */; };
 		84FF81341D87C69F00E6635E /* camra_preview@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FF81321D87C69F00E6635E /* camra_preview@3x.png */; };
 		86C9FA671E12580D003517E3 /* start.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 86C9FA661E12580D003517E3 /* start.jpeg */; };
 		B6079E7B1F38037800DE3FFC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F31BC91D9292BA00DA26FF /* libiconv.tbd */; };
 		B6079E7E1F38129100DE3FFC /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84544F2D1D93878D009BD4EC /* VideoToolbox.framework */; };
-		B6079E821F3AC47A00DE3FFC /* LFSessionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6079E811F3AC47A00DE3FFC /* LFSessionTestView.m */; };
 		B6585BE41F21FC2700B490EA /* libengine_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE31F21FC2700B490EA /* libengine_sdk.a */; };
 		B6585C0D1F22282600B490EA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF812A1D879E5700E6635E /* AVFoundation.framework */; };
+		B6C8CF7B1F3C913C008C0C98 /* LFCaptureSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C8CF781F3C913C008C0C98 /* LFCaptureSettingView.m */; };
+		B6C8CF7C1F3C913C008C0C98 /* LFPlayerSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C8CF7A1F3C913C008C0C98 /* LFPlayerSettingView.m */; };
 		B6CCAFB11F21B10C00B17B3E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CCAFB01F21B10C00B17B3E /* CoreMedia.framework */; };
 		B6CCAFB21F21B16600B17B3E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84544F2B1D938787009BD4EC /* AudioToolbox.framework */; };
 		B6CCAFB91F21BB3F00B17B3E /* libengineAdapter_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CCAFB81F21BB3F00B17B3E /* libengineAdapter_sdk.a */; };
@@ -38,8 +37,6 @@
 /* Begin PBXFileReference section */
 		62E52F7B76398AD9FC6E95B8 /* Pods-LFMixStreamDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFMixStreamDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LFMixStreamDemo/Pods-LFMixStreamDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		827BDB57E20762BF73CEB82F /* libPods-LFMixStreamDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFMixStreamDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		837BCCC91EBDEDF000F2F27E /* PlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDelegate.h; sourceTree = "<group>"; };
-		837BCCCA1EBDEDF000F2F27E /* PlayerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDelegate.m; sourceTree = "<group>"; };
 		844BCB901D86D72E00CC357C /* LFRTPDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LFRTPDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		844BCB941D86D72E00CC357C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		844BCB961D86D72E00CC357C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,8 +58,6 @@
 		84F31BC71D9292AC00DA26FF /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		84F31BC91D9292BA00DA26FF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		84F31BCB1D9292CD00DA26FF /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		84FF810A1D87932C00E6635E /* LFPlayerTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPlayerTestView.h; sourceTree = "<group>"; };
-		84FF810B1D87932C00E6635E /* LFPlayerTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFPlayerTestView.m; sourceTree = "<group>"; };
 		84FF81191D879C6700E6635E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		84FF811B1D879C6E00E6635E /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		84FF811D1D879C7500E6635E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -72,9 +67,11 @@
 		84FF81311D87C69F00E6635E /* camra_preview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camra_preview@2x.png"; sourceTree = "<group>"; };
 		84FF81321D87C69F00E6635E /* camra_preview@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camra_preview@3x.png"; sourceTree = "<group>"; };
 		86C9FA661E12580D003517E3 /* start.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = start.jpeg; sourceTree = "<group>"; };
-		B6079E801F3AC47A00DE3FFC /* LFSessionTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFSessionTestView.h; sourceTree = "<group>"; };
-		B6079E811F3AC47A00DE3FFC /* LFSessionTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFSessionTestView.m; sourceTree = "<group>"; };
 		B6585BE31F21FC2700B490EA /* libengine_sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libengine_sdk.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/LFMixStreamDemo-fvsxwtxfzdlyavgmvqnubgikcsfd/Build/Products/Debug-iphoneos/libengine_sdk.a"; sourceTree = "<group>"; };
+		B6C8CF771F3C913C008C0C98 /* LFCaptureSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFCaptureSettingView.h; sourceTree = "<group>"; };
+		B6C8CF781F3C913C008C0C98 /* LFCaptureSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFCaptureSettingView.m; sourceTree = "<group>"; };
+		B6C8CF791F3C913C008C0C98 /* LFPlayerSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPlayerSettingView.h; sourceTree = "<group>"; };
+		B6C8CF7A1F3C913C008C0C98 /* LFPlayerSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFPlayerSettingView.m; sourceTree = "<group>"; };
 		B6CCAFAD1F21B06B00B17B3E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		B6CCAFB01F21B10C00B17B3E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B6CCAFB81F21BB3F00B17B3E /* libengineAdapter_sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libengineAdapter_sdk.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/LFMixStreamDemo-fvsxwtxfzdlyavgmvqnubgikcsfd/Build/Products/Debug-iphoneos/libengineAdapter_sdk.a"; sourceTree = "<group>"; };
@@ -160,20 +157,18 @@
 		844BCB921D86D72E00CC357C /* LFMixStreamDemo */ = {
 			isa = PBXGroup;
 			children = (
-				B6079E801F3AC47A00DE3FFC /* LFSessionTestView.h */,
-				B6079E811F3AC47A00DE3FFC /* LFSessionTestView.m */,
+				B6C8CF771F3C913C008C0C98 /* LFCaptureSettingView.h */,
+				B6C8CF781F3C913C008C0C98 /* LFCaptureSettingView.m */,
+				B6C8CF791F3C913C008C0C98 /* LFPlayerSettingView.h */,
+				B6C8CF7A1F3C913C008C0C98 /* LFPlayerSettingView.m */,
 				844BCB961D86D72E00CC357C /* AppDelegate.h */,
 				844BCB971D86D72E00CC357C /* AppDelegate.m */,
 				F84A63581E9BBE9300049C9E /* MainViewController.h */,
 				F84F38CF1E9C6C1B00F4ABDF /* MainViewController.m */,
 				F84F38D11E9C76FA00F4ABDF /* InitViewController.h */,
 				F84F38D21E9C76FA00F4ABDF /* InitViewController.m */,
-				837BCCC91EBDEDF000F2F27E /* PlayerDelegate.h */,
-				837BCCCA1EBDEDF000F2F27E /* PlayerDelegate.m */,
 				844BCB991D86D72E00CC357C /* ViewController.h */,
 				844BCB9A1D86D72E00CC357C /* ViewController.m */,
-				84FF810A1D87932C00E6635E /* LFPlayerTestView.h */,
-				84FF810B1D87932C00E6635E /* LFPlayerTestView.m */,
 				844BCB9C1D86D72E00CC357C /* Main.storyboard */,
 				844BCB9F1D86D72E00CC357C /* Assets.xcassets */,
 				844BCBA11D86D72E00CC357C /* LaunchScreen.storyboard */,
@@ -359,12 +354,11 @@
 			files = (
 				844BCB9B1D86D72E00CC357C /* ViewController.m in Sources */,
 				844BCB981D86D72E00CC357C /* AppDelegate.m in Sources */,
-				B6079E821F3AC47A00DE3FFC /* LFSessionTestView.m in Sources */,
+				B6C8CF7B1F3C913C008C0C98 /* LFCaptureSettingView.m in Sources */,
 				F84F38D31E9C76FA00F4ABDF /* InitViewController.m in Sources */,
-				84FF810C1D87932C00E6635E /* LFPlayerTestView.m in Sources */,
 				844BCB951D86D72E00CC357C /* main.m in Sources */,
-				837BCCCB1EBDEDF000F2F27E /* PlayerDelegate.m in Sources */,
 				F84F38D01E9C6C1B00F4ABDF /* MainViewController.m in Sources */,
+				B6C8CF7C1F3C913C008C0C98 /* LFPlayerSettingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
