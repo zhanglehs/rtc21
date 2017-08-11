@@ -10,7 +10,6 @@
 		51BA0FD6693946012146EF3C /* libPods-LFMixStreamDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 827BDB57E20762BF73CEB82F /* libPods-LFMixStreamDemo.a */; };
 		844BCB951D86D72E00CC357C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCB941D86D72E00CC357C /* main.m */; };
 		844BCB981D86D72E00CC357C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCB971D86D72E00CC357C /* AppDelegate.m */; };
-		844BCB9B1D86D72E00CC357C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844BCB9A1D86D72E00CC357C /* ViewController.m */; };
 		844BCB9E1D86D72E00CC357C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844BCB9C1D86D72E00CC357C /* Main.storyboard */; };
 		844BCBA01D86D72E00CC357C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 844BCB9F1D86D72E00CC357C /* Assets.xcassets */; };
 		844BCBA31D86D72E00CC357C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 844BCBA11D86D72E00CC357C /* LaunchScreen.storyboard */; };
@@ -24,13 +23,13 @@
 		B6079E7E1F38129100DE3FFC /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84544F2D1D93878D009BD4EC /* VideoToolbox.framework */; };
 		B6585BE41F21FC2700B490EA /* libengine_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6585BE31F21FC2700B490EA /* libengine_sdk.a */; };
 		B6585C0D1F22282600B490EA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FF812A1D879E5700E6635E /* AVFoundation.framework */; };
+		B696FC0E1F3D47CA008FCA05 /* RtpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B696FC0D1F3D47CA008FCA05 /* RtpViewController.m */; };
 		B6C8CF7B1F3C913C008C0C98 /* LFCaptureSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C8CF781F3C913C008C0C98 /* LFCaptureSettingView.m */; };
 		B6C8CF7C1F3C913C008C0C98 /* LFPlayerSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C8CF7A1F3C913C008C0C98 /* LFPlayerSettingView.m */; };
 		B6CCAFB11F21B10C00B17B3E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CCAFB01F21B10C00B17B3E /* CoreMedia.framework */; };
 		B6CCAFB21F21B16600B17B3E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84544F2B1D938787009BD4EC /* AudioToolbox.framework */; };
 		B6CCAFB91F21BB3F00B17B3E /* libengineAdapter_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6CCAFB81F21BB3F00B17B3E /* libengineAdapter_sdk.a */; };
 		F84F38D01E9C6C1B00F4ABDF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F84F38CF1E9C6C1B00F4ABDF /* MainViewController.m */; };
-		F84F38D31E9C76FA00F4ABDF /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F84F38D21E9C76FA00F4ABDF /* InitViewController.m */; };
 		F84F39CE1E9CE45800F4ABDF /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F84F39CD1E9CE45800F4ABDF /* libicucore.tbd */; };
 /* End PBXBuildFile section */
 
@@ -41,8 +40,6 @@
 		844BCB941D86D72E00CC357C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		844BCB961D86D72E00CC357C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		844BCB971D86D72E00CC357C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		844BCB991D86D72E00CC357C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		844BCB9A1D86D72E00CC357C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		844BCB9D1D86D72E00CC357C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		844BCB9F1D86D72E00CC357C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		844BCBA21D86D72E00CC357C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,6 +65,8 @@
 		84FF81321D87C69F00E6635E /* camra_preview@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camra_preview@3x.png"; sourceTree = "<group>"; };
 		86C9FA661E12580D003517E3 /* start.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = start.jpeg; sourceTree = "<group>"; };
 		B6585BE31F21FC2700B490EA /* libengine_sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libengine_sdk.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/LFMixStreamDemo-fvsxwtxfzdlyavgmvqnubgikcsfd/Build/Products/Debug-iphoneos/libengine_sdk.a"; sourceTree = "<group>"; };
+		B696FC0C1F3D47CA008FCA05 /* RtpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtpViewController.h; sourceTree = "<group>"; };
+		B696FC0D1F3D47CA008FCA05 /* RtpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RtpViewController.m; sourceTree = "<group>"; };
 		B6C8CF771F3C913C008C0C98 /* LFCaptureSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFCaptureSettingView.h; sourceTree = "<group>"; };
 		B6C8CF781F3C913C008C0C98 /* LFCaptureSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFCaptureSettingView.m; sourceTree = "<group>"; };
 		B6C8CF791F3C913C008C0C98 /* LFPlayerSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFPlayerSettingView.h; sourceTree = "<group>"; };
@@ -78,8 +77,6 @@
 		C799DA7166B27F3B5EC18738 /* Pods-LFMixStreamDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFMixStreamDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LFMixStreamDemo/Pods-LFMixStreamDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F84A63581E9BBE9300049C9E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		F84F38CF1E9C6C1B00F4ABDF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		F84F38D11E9C76FA00F4ABDF /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitViewController.h; sourceTree = "<group>"; };
-		F84F38D21E9C76FA00F4ABDF /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitViewController.m; sourceTree = "<group>"; };
 		F84F39CD1E9CE45800F4ABDF /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -157,6 +154,8 @@
 		844BCB921D86D72E00CC357C /* LFMixStreamDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B696FC0C1F3D47CA008FCA05 /* RtpViewController.h */,
+				B696FC0D1F3D47CA008FCA05 /* RtpViewController.m */,
 				B6C8CF771F3C913C008C0C98 /* LFCaptureSettingView.h */,
 				B6C8CF781F3C913C008C0C98 /* LFCaptureSettingView.m */,
 				B6C8CF791F3C913C008C0C98 /* LFPlayerSettingView.h */,
@@ -165,10 +164,6 @@
 				844BCB971D86D72E00CC357C /* AppDelegate.m */,
 				F84A63581E9BBE9300049C9E /* MainViewController.h */,
 				F84F38CF1E9C6C1B00F4ABDF /* MainViewController.m */,
-				F84F38D11E9C76FA00F4ABDF /* InitViewController.h */,
-				F84F38D21E9C76FA00F4ABDF /* InitViewController.m */,
-				844BCB991D86D72E00CC357C /* ViewController.h */,
-				844BCB9A1D86D72E00CC357C /* ViewController.m */,
 				844BCB9C1D86D72E00CC357C /* Main.storyboard */,
 				844BCB9F1D86D72E00CC357C /* Assets.xcassets */,
 				844BCBA11D86D72E00CC357C /* LaunchScreen.storyboard */,
@@ -352,13 +347,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				844BCB9B1D86D72E00CC357C /* ViewController.m in Sources */,
 				844BCB981D86D72E00CC357C /* AppDelegate.m in Sources */,
 				B6C8CF7B1F3C913C008C0C98 /* LFCaptureSettingView.m in Sources */,
-				F84F38D31E9C76FA00F4ABDF /* InitViewController.m in Sources */,
 				844BCB951D86D72E00CC357C /* main.m in Sources */,
 				F84F38D01E9C6C1B00F4ABDF /* MainViewController.m in Sources */,
 				B6C8CF7C1F3C913C008C0C98 /* LFPlayerSettingView.m in Sources */,
+				B696FC0E1F3D47CA008FCA05 /* RtpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,10 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "RtpViewController.h"
 #import <AdSupport/ASIdentifierManager.h>
+
+#define ENABLE_GRID_VIEW 0   // 使能九宫格界面
 
 @interface AppDelegate ()
 
@@ -22,10 +25,12 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+#if ENABLE_GRID_VIEW
     MainViewController *view = [[MainViewController alloc] init];
+#else
+    RtpViewController *view = [[RtpViewController alloc] init];
+#endif
     self.window.rootViewController = view;
-//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:view];
-//    self.window.rootViewController = nav;
     
     [self.window makeKeyAndVisible];
     return YES;

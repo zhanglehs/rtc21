@@ -6,7 +6,7 @@
 //  Copyright © 2016年 admin. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "RtpViewController.h"
 #import <YYKit/YYKit.h>
 #import "LFCaptureSettingView.h"
 #import "LFPlayerSettingView.h"
@@ -14,7 +14,7 @@
 #import <YYKit/YYReachability.h>
 #import <AdSupport/ASIdentifierManager.h>
 
-@interface ViewController ()<rtcPlayerEventDelegate>
+@interface RtpViewController ()<rtcPlayerEventDelegate>
 
 @property (nonatomic, strong) UIButton *mCaptureButton;
 @property (nonatomic, strong) UIButton *mPlayerButton;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation ViewController
+@implementation RtpViewController
 
 -(id _Nonnull)init
 {

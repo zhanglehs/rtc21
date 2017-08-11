@@ -6,7 +6,5 @@
 
 @interface MainViewController : UIViewController
 
-- (void)transController:(int)nameId;
-
 @end
 

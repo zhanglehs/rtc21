@@ -7,22 +7,37 @@
 #import <YYKit/YYKit.h>
 #import <YYKit/YYReachability.h>
 
-#import "InitViewController.h"
-#import "ViewController.h"
+#import "RtpViewController.h"
 
 @interface MainViewController ()
 
-@property (nonatomic,strong) InitViewController *laifengInitVC;
-@property (nonatomic,strong) ViewController *laifengRtpVC;
-@property (nonatomic, strong) UIViewController *currentVC;
-@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic,strong) RtpViewController *mRtpViewCtrl;
+@property (nonatomic,strong) UIButton *LaifengTestLianTong;
+@property (nonatomic,strong) UIButton *LaifengTestDownloadHuabei;
+@property (nonatomic,strong) UIButton *LaifengTestDownloadHuadong;
+@property (nonatomic,strong) UIButton *LaifengTestDownloadHuanan;
+@property (nonatomic,strong) UIButton *LaifengTestRtp;
+@property (nonatomic,strong) UIButton *LaifengTestLianMic;
+
 @end
 
 @implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupSubControllers];
+    
+    self.mRtpViewCtrl = [[RtpViewController alloc] init];
+    [self addChildViewController:self.mRtpViewCtrl];
+    [self.view addSubview:self.mRtpViewCtrl.view];
+    
+    [self.view addSubview:self.LaifengTestLianTong];
+    [self.view addSubview:self.LaifengTestDownloadHuabei];
+    [self.view addSubview:self.LaifengTestDownloadHuadong];
+    [self.view addSubview:self.LaifengTestDownloadHuanan];
+    [self.view addSubview:self.LaifengTestRtp];
+    [self.view addSubview:self.LaifengTestLianMic];
+    
+    NSLog(@"init view controller load\n");
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -35,83 +50,95 @@
     [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
--(void)setupSubControllers{
-    _laifengRtpVC = [[ViewController alloc] init];
-    [self addChildViewController:_laifengRtpVC];
-    [self.view addSubview:_laifengRtpVC.view];
-    
-    _laifengInitVC = [[InitViewController alloc] init];
-    [self addChildViewController:_laifengInitVC];
-    [_laifengInitVC setParentViewController:self];
-    
-    [self fitFrameForChildViewController:_laifengInitVC];
-    [self.view addSubview:_laifengInitVC.view];
-    self.currentVC = _laifengInitVC;
-}
-
-
 #pragma mark -- Setter Getter
--(UIView *)contentView{
-    if(!_contentView){
-        _contentView = [UIButton new];
+-(UIButton *)LaifengTestLianTong{
+    if(!_LaifengTestLianTong){
+        _LaifengTestLianTong = [UIButton new];
         CGSize size = [[UIScreen mainScreen] bounds].size;
         CGPoint point = [[UIScreen mainScreen] bounds].origin;
-        _contentView.size = size;
-        _contentView.top = point.y;
-        _contentView.left = point.x;
-        [_contentView setBackgroundColor:[UIColor blueColor]];
+        _LaifengTestLianTong.size = CGSizeMake(size.width/2, size.height/3);
+        _LaifengTestLianTong.top = point.y;
+        _LaifengTestLianTong.left = point.x;
+        [_LaifengTestLianTong setTitle:@"连接性" forState:UIControlStateNormal];
+        [_LaifengTestLianTong setBackgroundColor:[UIColor blueColor]];
     }
-    return _contentView;
+    return _LaifengTestLianTong;
 }
 
-- (void)transitionFromOldViewController:(UIViewController *)oldViewController toNewViewController:(UIViewController *)newViewController{
-    
-    [self transitionFromViewController:oldViewController toViewController:newViewController duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {
-        if (finished) {
-            [newViewController didMoveToParentViewController:self];
-            _currentVC = newViewController;
-        }else{
-            _currentVC = oldViewController;
-        }
-    }];
-}
-
-- (void)fitFrameForChildViewController:(UIViewController *)chileViewController{
-    CGRect frame = self.view.frame;
-    frame.origin.y = 0;
-    chileViewController.view.frame = frame;
-}
-
-- (void)removeAllChildViewControllers{
-    for (UIViewController *vc in self.childViewControllers) {
-        [vc willMoveToParentViewController:nil];
-        [vc removeFromParentViewController];
+-(UIButton *)LaifengTestDownloadHuabei{
+    if(!_LaifengTestDownloadHuabei){
+        _LaifengTestDownloadHuabei = [UIButton new];
+        CGSize size = [[UIScreen mainScreen] bounds].size;
+        CGPoint point = [[UIScreen mainScreen] bounds].origin;
+        _LaifengTestDownloadHuabei.size = CGSizeMake(size.width/2, size.height/3);
+        _LaifengTestDownloadHuabei.top = point.y;
+        _LaifengTestDownloadHuabei.left = point.x + size.width/2;
+        [_LaifengTestDownloadHuabei setTitle:@"华北" forState:UIControlStateNormal];
+        [_LaifengTestDownloadHuabei setBackgroundColor:[UIColor greenColor]];
     }
+    return _LaifengTestDownloadHuabei;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(UIButton *)LaifengTestDownloadHuadong{
+    if(!_LaifengTestDownloadHuadong){
+        _LaifengTestDownloadHuadong = [UIButton new];
+        CGSize size = [[UIScreen mainScreen] bounds].size;
+        CGPoint point = [[UIScreen mainScreen] bounds].origin;
+        _LaifengTestDownloadHuadong.size = CGSizeMake(size.width/2, size.height/3);
+        _LaifengTestDownloadHuadong.top = point.y+size.height/3;
+        _LaifengTestDownloadHuadong.left = point.x;
+        [_LaifengTestDownloadHuadong setTitle:@"华东" forState:UIControlStateNormal];
+        [_LaifengTestDownloadHuadong setBackgroundColor:[UIColor orangeColor]];
+    }
+    return _LaifengTestDownloadHuadong;
 }
 
-- (void)transController:(int)nameId
-{
-    if(nameId == 0){
-        [self fitFrameForChildViewController:_laifengInitVC];
-        [UIView animateWithDuration:0.3 animations:^{
-            self.laifengInitVC.view.left = 0;
-            self.laifengRtpVC.view.left = self.laifengRtpVC.view.width * -1;
-            [self.view bringSubviewToFront:self.laifengInitVC.view];
+-(UIButton *)LaifengTestDownloadHuanan{
+    if(!_LaifengTestDownloadHuanan){
+        _LaifengTestDownloadHuanan = [UIButton new];
+        CGSize size = [[UIScreen mainScreen] bounds].size;
+        CGPoint point = [[UIScreen mainScreen] bounds].origin;
+        _LaifengTestDownloadHuanan.size = CGSizeMake(size.width/2, size.height/3);
+        _LaifengTestDownloadHuanan.top = point.y+size.height/3;
+        _LaifengTestDownloadHuanan.left = point.x+size.width/2;
+        [_LaifengTestDownloadHuanan setTitle:@"华南" forState:UIControlStateNormal];
+        [_LaifengTestDownloadHuanan setBackgroundColor:[UIColor yellowColor]];
+    }
+    return _LaifengTestDownloadHuanan;
+}
+
+-(UIButton *)LaifengTestRtp{
+    if(!_LaifengTestRtp){
+        _LaifengTestRtp = [UIButton new];
+        CGSize size = [[UIScreen mainScreen] bounds].size;
+        CGPoint point = [[UIScreen mainScreen] bounds].origin;
+        _LaifengTestRtp.size = CGSizeMake(size.width/2, size.height/3);
+        _LaifengTestRtp.top = point.y+size.height/3+size.height/3;
+        _LaifengTestRtp.left = point.x;
+        [_LaifengTestRtp setTitle:@"Laifeng + Rtp" forState:UIControlStateNormal];
+        @weakify(self)
+        [_LaifengTestRtp addBlockForControlEvents:UIControlEventTouchUpInside block:^(id  _Nonnull sender) {
+            @strongify(self)
+            [self.view bringSubviewToFront:self.mRtpViewCtrl.view];
         }];
+        _LaifengTestRtp.accessibilityIdentifier = @"testRtp";
+        [_LaifengTestRtp setBackgroundColor:[UIColor redColor]];
     }
-    else if(nameId == 5){
-        [self fitFrameForChildViewController:_laifengRtpVC];
-        [UIView animateWithDuration:0.3 animations:^{
-            self.laifengInitVC.view.left = self.laifengInitVC.view.width * -1;
-            self.laifengRtpVC.view.left = 0;
-            [self.view bringSubviewToFront:self.laifengRtpVC.view];
-        }];
+    return _LaifengTestRtp;
+}
+
+-(UIButton *)LaifengTestLianMic{
+    if(!_LaifengTestLianMic){
+        _LaifengTestLianMic = [UIButton new];
+        CGSize size = [[UIScreen mainScreen] bounds].size;
+        CGPoint point = [[UIScreen mainScreen] bounds].origin;
+        _LaifengTestLianMic.size = CGSizeMake(size.width/2, size.height/3);
+        _LaifengTestLianMic.top = point.y+size.height/3+size.height/3;
+        _LaifengTestLianMic.left = point.x+size.width/2;
+        [_LaifengTestLianMic setTitle:@"连麦" forState:UIControlStateNormal];
+        [_LaifengTestLianMic setBackgroundColor:[UIColor purpleColor]];
     }
+    return _LaifengTestLianMic;
 }
 
 @end
