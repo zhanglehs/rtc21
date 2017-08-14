@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,10 +141,43 @@ public class LaifengRtpActivity extends Activity {
         mSurfaceView.setZOrderOnTop(false);
         mSurfaceView.setZOrderMediaOverlay(true);
 
+        mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            public void surfaceCreated(SurfaceHolder var1) {
+                if (mLFPlayer != null) {
+                    mLFPlayer.SetWindow(var1.getSurface());
+                }
+            }
+
+            public void surfaceChanged(SurfaceHolder var1, int var2, int var3, int var4) {
+            }
+
+            public void surfaceDestroyed(SurfaceHolder var1){
+                if (mLFPlayer != null) {
+                    mLFPlayer.SetWindow(null);
+                }
+            }
+        });
+
         mSurfaceView2 = (SurfaceView) findViewById(R.id.surfaceView2);
         if (mEnablePlayer2) {
             mSurfaceView2.setZOrderOnTop(false);
             mSurfaceView2.setZOrderMediaOverlay(true);
+            mSurfaceView2.getHolder().addCallback(new SurfaceHolder.Callback() {
+                public void surfaceCreated(SurfaceHolder var1) {
+                    if (mLFPlayer2 != null) {
+                        mLFPlayer2.SetWindow(var1.getSurface());
+                    }
+                }
+
+                public void surfaceChanged(SurfaceHolder var1, int var2, int var3, int var4) {
+                }
+
+                public void surfaceDestroyed(SurfaceHolder var1){
+                    if (mLFPlayer2 != null) {
+                        mLFPlayer2.SetWindow(null);
+                    }
+                }
+            });
         }
         mListView = (ListView) findViewById(R.id.debugInfoList);
         mListView.setStackFromBottom(true);
@@ -318,7 +352,6 @@ public class LaifengRtpActivity extends Activity {
         mLFPlayer = new RtpPlayer();
         mLFPlayer.setCallback(mRtpPlayerCallback);
         mLFPlayer.CreatePlayer();
-        mLFPlayer.SetWindow(mSurfaceView.getHolder().getSurface());
 
         if (mEnablePlayer2) {
             if (mLFPlayer2 != null) {
@@ -327,7 +360,6 @@ public class LaifengRtpActivity extends Activity {
             mLFPlayer2 = new RtpPlayer();
             mLFPlayer2.setCallback(mRtpPlayerCallback);
             mLFPlayer2.CreatePlayer();
-            mLFPlayer2.SetWindow(mSurfaceView2.getHolder().getSurface());
         }
     }
 
@@ -343,9 +375,15 @@ public class LaifengRtpActivity extends Activity {
             logLevel = 1;
         else if(mPlayLog.getSelectedItem().toString().equalsIgnoreCase("CLIENT-RTP") == true)
             logLevel = 2;
+        if (mSurfaceView.getHolder().getSurface().isValid()) {
+            mLFPlayer.SetWindow(mSurfaceView.getHolder().getSurface());
+        }
         mLFPlayer.StartPlay(appId, alias, host,"98765",CommonUtils.getUniquePsuedoID(),logLevel);
         if (mEnablePlayer2) {
             String alias2 = mPlayAlias2.getText().toString();
+            if (mSurfaceView2.getHolder().getSurface().isValid()) {
+                mLFPlayer2.SetWindow(mSurfaceView2.getHolder().getSurface());
+            }
             mLFPlayer2.StartPlay(appId, alias2, host, "98765",CommonUtils.getUniquePsuedoID(),logLevel);
         }
     }
@@ -443,8 +481,6 @@ public class LaifengRtpActivity extends Activity {
             mLFPlayer2.StopPlay();
         }
 
-        mSurfaceView.setVisibility(View.GONE);
-        mSurfaceView2.setVisibility(View.GONE);
         mPlayBtn.setText("播放");
     }
 
