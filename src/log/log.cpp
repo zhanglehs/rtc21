@@ -28,6 +28,10 @@
 #include <glob.h>
 #endif
 
+#ifdef __ANDROID__
+#include <sys/prctl.h>
+#endif
+
 namespace {
 
 #ifdef WIN32
@@ -598,6 +602,9 @@ namespace live_stream_sdk {
   }
 
   void* PTW32_CDECL CLogReport::WorkerThread(void* arg) {
+#ifdef __ANDROID__
+    prctl(PR_SET_NAME, reinterpret_cast<unsigned long>("LogReportThread"));
+#endif
     CLogReport *pThis = (CLogReport*)arg;
     return pThis->WorkerThreadImpl();
   }

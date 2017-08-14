@@ -33,6 +33,9 @@ typedef int SOCKET;
 #include <algorithm>
 #include <string>
 #include <map>
+#ifdef __ANDROID__
+#include <sys/prctl.h>
+#endif
 
 // TODO: zhangle
 #include <event2/thread.h>
@@ -116,6 +119,9 @@ namespace live_stream_sdk {
   }
 
   void * PTW32_CDECL RTPDownloadInternal::WorkerThread(void *arg) {
+#ifdef __ANDROID__
+    prctl(PR_SET_NAME, reinterpret_cast<unsigned long>("NetDownloadThread"));
+#endif
     RTPDownloadInternal *pThis = (RTPDownloadInternal*)arg;
     return pThis->WorkerThreadImpl();
   }
