@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         grid.setAdapter(new HoloTilesAdapter());
 
         try{
-            System.loadLibrary("webrtcdemo-jni");
+            System.loadLibrary("avengine_dll");
             System.loadLibrary("engine_sdk_jni");
             RtpPlayer.init(context);
         }catch(Exception ex)

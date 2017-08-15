@@ -3,15 +3,15 @@ LOCAL_PATH := $(call my-dir)
 
 
 include $(CLEAR_VARS)
-LOCAL_MODULE    := webrtcdemo-jni
-LOCAL_SRC_FILES := prebuilt/libwebrtcdemo-jni.so
+LOCAL_MODULE    := libavengine_dll
+LOCAL_SRC_FILES := prebuilt/libavengine_dll.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := engine_sdk_jni
-LOCAL_SHARED_LIBRARIES += webrtcdemo-jni
+LOCAL_SHARED_LIBRARIES += libavengine_dll
 
 ENGINE_SDK_DIR = ../../../..
 #LIB_EVENT_DIR = $(LOCAL_PATH)/../libevent-2.1.8
