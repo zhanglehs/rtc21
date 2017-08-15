@@ -74,6 +74,14 @@ namespace network
     return 0;
   }
 
+  BaseNetworkChannel::BaseNetworkChannel() {
+    _send_lost_rate = 0;
+    _recv_lost_rate = 0;
+    _state = Construct;
+    _addr = NULL;
+    _socket = -1;
+  }
+
   void BaseNetworkChannel::set_nonblock()
   {
 #ifdef WIN32                        

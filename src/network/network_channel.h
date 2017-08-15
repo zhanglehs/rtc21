@@ -54,6 +54,7 @@ namespace network
       Closed = 5,
     };
 
+    BaseNetworkChannel();
     virtual int flush() = 0;
     virtual int init(const char* remote_ip, uint16_t remote_port, bool nonblock) = 0;
     virtual int init(int socket, struct addrinfo * remote_addr) = 0;
