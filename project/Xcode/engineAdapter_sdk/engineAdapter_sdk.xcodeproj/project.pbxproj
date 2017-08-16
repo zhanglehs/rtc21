@@ -28,7 +28,6 @@
 		83223F951F04E058009C167D /* ReachabilityEngineAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityEngineAdapter.m; sourceTree = "<group>"; };
 		8392A0221F04D2F400C18FB8 /* libengineAdapter_sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libengineAdapter_sdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8392A0371F04D35400C18FB8 /* LFPlayerEngineAdapter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LFPlayerEngineAdapter.mm; sourceTree = "<group>"; };
-		8392A0441F04D6DE00C18FB8 /* ios_video_render_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ios_video_render_api.h; sourceTree = "<group>"; };
 		B6079E7F1F3A9ED500DE3FFC /* LFPlayerEngineAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LFPlayerEngineAdapter.h; path = include/LFPlayerEngineAdapter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +72,6 @@
 				B6CCAFBE1F21CDEB00B17B3E /* include */,
 				83223F941F04E058009C167D /* ReachabilityEngineAdapter.h */,
 				83223F951F04E058009C167D /* ReachabilityEngineAdapter.m */,
-				8392A0441F04D6DE00C18FB8 /* ios_video_render_api.h */,
 				8392A0371F04D35400C18FB8 /* LFPlayerEngineAdapter.mm */,
 			);
 			path = engineAdapter_sdk;
