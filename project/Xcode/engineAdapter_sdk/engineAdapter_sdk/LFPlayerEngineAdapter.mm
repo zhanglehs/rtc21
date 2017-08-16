@@ -20,6 +20,8 @@
 @property (nonatomic, strong) ReachabilityEngineAdapter *mNetReachability;
 @property (nonatomic, assign) RtcPlayer *mPlayer;
 @property (nonatomic, weak) id<rtcPlayerEventDelegate> _Nullable mDelegate;
+@property (nonatomic, assign) int mVideoWidth;
+@property (nonatomic, assign) int mVideoHeight;
 @end
 
 @implementation rtcPlayerAdapter
@@ -28,6 +30,8 @@
 {
     self = [super init];
     if (self) {
+        self.mVideoWidth = 0;
+        self.mVideoHeight = 0;
 //        UIApplicationState state = [UIApplication sharedApplication].applicationState;
 //        if(UIApplicationStateActive != state) {
 //            CREATE_VIDEO_RENDER_PAUSE(self.mVideoHnd,true);
@@ -51,14 +55,13 @@
     return self;
 }
 
--(int)uninit
+-(void)dealloc
 {
     self.mDelegate = nil;
     [self removeNotifications];
     [self stopPlay];
     delete _mPlayer;
     _mPlayer = nil;
-    return 0;
 }
 
 -(int)startPlay:(rtcOcNetworkConfig* _Nullable)net
@@ -125,17 +128,12 @@
 
 -(int)getVideoWidth
 {
-    return 0;
+    return self.mVideoWidth;
 }
 
 -(int)getVideoHeight
 {
-    return 0;
-}
-
--(void)dealloc
-{
-    [self uninit];
+    return self.mVideoHeight;
 }
 
 static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, long lParam) {
@@ -150,6 +148,8 @@ static void eventNotifyRTPOnState(RtcPlayer* player, int msgid, long wParam, lon
     switch (msgid) {
         case RTC_PLAYER_MSG_VIDEO_RESOLUTION:
             if ([delegate respondsToSelector:@selector(onPlayerVideoWidth:AndHeight:)]) {
+                pThis.mVideoWidth = (int)wParam;
+                pThis.mVideoHeight = (int)lParam;
                 [delegate onPlayerVideoWidth:(int)wParam AndHeight:(int)lParam];
             }
             break;
