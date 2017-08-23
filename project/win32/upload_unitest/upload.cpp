@@ -745,7 +745,7 @@ long UploadWindow::onCmdUploadStart(FXObject* sender, FXSelector, void*) {
     dispatch.is_tcp = (protocol_combo_->getCurrentItem() == 0);
     strcpy(dispatch.streamid, stream_id.text());
     strcpy(dispatch.mcu_ip, upload_ip.text());
-    dispatch.mcu_udp_port = (unsigned short)(upload_udp_port.text());
+    dispatch.mcu_udp_port = (unsigned short)atoi(upload_udp_port.text());
     dispatch.mcu_tcp_port = (unsigned short)atoi(upload_tcp_port.text());
     strcpy(dispatch.mcu_token, "98765");
     sprintf(dispatch.sdp_url, "http://%s:%s/upload/sdp/%s.sdp?token=98765", dispatch.mcu_ip, upload_http_port.text(), dispatch.streamid);

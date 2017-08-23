@@ -31,7 +31,6 @@ using namespace live_stream_sdk;
 namespace network
 {
 
-
   SimpleUDPChannel::SimpleUDPChannel()
   {
     _send_lost_rate = 0;

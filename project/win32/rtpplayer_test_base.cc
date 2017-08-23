@@ -343,19 +343,19 @@ int play_start(RTPPlayerConfig &config) {
   for (int i = 0; i < config.multi_players; i++) {
     s_players[i]->Start(&player_config, OnMsgCallback);
 
-    if (auto_schedule && config.download_ip.length()) {
-      // 获取streamid，然后再使用指定的download信息拉流
-      while (true) {
-        rtcDownloadDispatchConfig dispatch;
-        s_players[i]->GetDownloader()->GetDispatchConfig(&dispatch);
-        if (dispatch.mcu_udp_port) {
-          Sleep(100);
-          config.streamid = dispatch.streamid;
-          break;
-        }
-        Sleep(10);
-      }
-    }
+    //if (auto_schedule && config.download_ip.length()) {
+    //  // 获取streamid，然后再使用指定的download信息拉流
+    //  while (true) {
+    //    rtcDownloadDispatchConfig dispatch;
+    //    s_players[i]->GetDownloader()->GetDispatchConfig(&dispatch);
+    //    if (dispatch.mcu_udp_port) {
+    //      Sleep(100);
+    //      config.streamid = dispatch.streamid;
+    //      break;
+    //    }
+    //    Sleep(10);
+    //  }
+    //}
 
     if (config.download_ip.length()) {
       rtcDownloadDispatchConfig dispatch_config;
@@ -369,7 +369,7 @@ int play_start(RTPPlayerConfig &config) {
       strcpy(dispatch_config.mcu_ip, config.download_ip.c_str());
       dispatch_config.mcu_udp_port = config.download_udp_port;
       dispatch_config.mcu_tcp_port = config.download_tcp_port;
-      strcpy(dispatch_config.mcu_token, config.token.c_str());
+      strcpy(dispatch_config.mcu_token, "98765");
       if (dispatch_config.mcu_ip[0]) {
         sprintf(dispatch_config.sdp_url, "http://%s:%d/download/sdp/%s.sdp?token=%s",
           config.download_ip.c_str(), config.download_http_port, config.streamid.c_str(), token);

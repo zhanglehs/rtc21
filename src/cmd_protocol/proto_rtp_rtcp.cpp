@@ -24,10 +24,8 @@ int32_t encode_rtp_u2r_req_state(const rtp_u2r_req_state *body, DataBuffer *obuf
   {
     return -1;
   }
-  
-  int ext_data_len = 0;
 
-  uint32_t total_sz = sizeof(proto_header) + sizeof(rtp_u2r_req_state) + ext_data_len + 4;
+  uint32_t total_sz = sizeof(proto_header) + sizeof(rtp_u2r_req_state);
   encode_header(obuf, CMD_RTP_U2R_REQ_STATE, total_sz);
 
   uint32_t version = htonl(body->version);
@@ -138,9 +136,7 @@ int32_t encode_rtp_d2p_req_state(const rtp_d2p_req_state* body, DataBuffer *obuf
     return -1;
   }
 
-  int ext_data_len = 0;
-
-  uint32_t total_sz = sizeof(proto_header) + sizeof(rtp_d2p_req_state) + ext_data_len + 4;
+  uint32_t total_sz = sizeof(proto_header) + sizeof(rtp_d2p_req_state);
   encode_header(obuf, CMD_RTP_D2P_REQ_STATE, total_sz);
 
   uint32_t version = htonl(body->version);
