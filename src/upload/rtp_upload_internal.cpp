@@ -348,6 +348,10 @@ namespace live_stream_sdk {
   }
 
   void RTPUploadInternal::GetUploadUrl() {
+    if (m_internal_config.streamid[0]) {
+      OnGetUploadUrlSuccessed();
+      return;
+    }
     memcpy(&m_internal_config, &m_user_config, sizeof(m_internal_config));
     m_state_internal = InternalState::INTERNAL_STATE_GET_UPLOAD_URL;
     m_http_upload_url = CHttpFetch::Create(m_ev_base);
