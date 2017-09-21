@@ -601,6 +601,7 @@ namespace live_stream_sdk {
       }
       break;
     case CMD_RTCP_D2P_PACKET:
+    case CMD_RTCP_U2R_PACKET:
       ret = decode_rtcp_d2p_packet(stream_id, buffer);
       if (ret < 0) {
         ERR("decode rtcp packet error ret code %d", ret);
