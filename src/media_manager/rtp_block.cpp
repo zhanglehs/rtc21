@@ -54,7 +54,7 @@ namespace media_manager
     if (_rtp_header != NULL)
     {
       delete_count++;
-      delete _rtp_header;
+      delete[] _rtp_header;
       _rtp_header = NULL;
     }
 
