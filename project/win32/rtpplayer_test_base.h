@@ -28,6 +28,7 @@ public:
   std::string reporturl;
 
   std::string config_file;
+  bool tcp;
 
   //Broken screen
   uint32_t is_lostpacketStrategy;//

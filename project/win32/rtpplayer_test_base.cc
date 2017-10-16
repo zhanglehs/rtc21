@@ -222,6 +222,7 @@ void load_player_config(const char* config_file, RTPPlayerConfig &config) {
   char streamid[64];
   GetPrivateProfileStringA("player", "streamid", "", streamid, _countof(streamid) - 1, config_file);
   config.streamid = streamid;
+  config.tcp = !!GetPrivateProfileIntA("player", "is_tcp", 0, config_file);
   // TODO: 待续
 }
 
@@ -369,10 +370,11 @@ int play_start(RTPPlayerConfig &config) {
       strcpy(dispatch_config.mcu_ip, config.download_ip.c_str());
       dispatch_config.mcu_udp_port = config.download_udp_port;
       dispatch_config.mcu_tcp_port = config.download_tcp_port;
+      dispatch_config.is_tcp = config.tcp;
       strcpy(dispatch_config.mcu_token, "98765");
       if (dispatch_config.mcu_ip[0]) {
-        sprintf(dispatch_config.sdp_url, "http://%s:%d/download/sdp/%s.sdp?token=%s",
-          config.download_ip.c_str(), config.download_http_port, config.streamid.c_str(), token);
+        sprintf(dispatch_config.sdp_url, "http://%s:%d/download/sdp?streamid=%s",
+          config.download_ip.c_str(), config.download_http_port, config.streamid.c_str());
       }
 
       s_players[i]->GetDownloader()->Stop();

@@ -207,19 +207,19 @@ UploadWindow::UploadWindow(FXApp* a) : FXMainWindow(a, "upload_unitest", NULL, N
 
   new FXLabel(upload_init_matrix, "ip", NULL, LAYOUT_LEFT | FRAME_NONE);
   ip_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FIX_WIDTH | LAYOUT_FILL_COLUMN, 0, 0, 100, 0);
-  //ip_text_->setText(tr("103.41.143.103"));
+  ip_text_->setText(tr("192.168.245.133"));
 
   new FXLabel(upload_init_matrix, "udp", NULL, LAYOUT_LEFT | FRAME_NONE);
   udp_port_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FILL_X | LAYOUT_FILL_COLUMN);
-  //udp_port_text_->setText(tr("80"));
+  udp_port_text_->setText(tr("8142"));
 
   new FXLabel(upload_init_matrix, "tcp", NULL, LAYOUT_LEFT | FRAME_NONE);
   tcp_port_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
-  //tcp_port_text_->setText(tr("80"));
+  tcp_port_text_->setText(tr("8102"));
 
   new FXLabel(upload_init_matrix, "http", NULL, LAYOUT_LEFT | FRAME_NONE);
   http_port_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FILL_X | LAYOUT_FILL_COLUMN);
-  //http_port_text_->setText(tr("81"));
+  http_port_text_->setText(tr("8142"));
 
   new FXLabel(upload_init_matrix, "videoRate", NULL, LAYOUT_LEFT | FRAME_NONE);
   video_rate_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
@@ -748,7 +748,7 @@ long UploadWindow::onCmdUploadStart(FXObject* sender, FXSelector, void*) {
     dispatch.mcu_udp_port = (unsigned short)atoi(upload_udp_port.text());
     dispatch.mcu_tcp_port = (unsigned short)atoi(upload_tcp_port.text());
     strcpy(dispatch.mcu_token, "98765");
-    sprintf(dispatch.sdp_url, "http://%s:%s/upload/sdp/%s.sdp?token=98765", dispatch.mcu_ip, upload_http_port.text(), dispatch.streamid);
+    sprintf(dispatch.sdp_url, "http://%s:%s/upload/sdp?streamid=%s", dispatch.mcu_ip, upload_http_port.text(), dispatch.streamid);
     capture_->GetUploader()->Start(&dispatch);
 
     INF("Begin to upload onCmdUploadStart");
