@@ -155,7 +155,7 @@ rtcRTPPackage::rtcRTPPackage(unsigned int audio_ssrc, unsigned int video_ssrc,
   unsigned int audio_frequence, unsigned int audio_frame_size) {
   m_audio_ssrc = audio_ssrc;
   m_audio_seqnum = 0;
-  m_audio_count = 0;
+  m_autio_rtp_ts = 0;
   m_audio_start_capture_ms = 0;
   m_audio_inited = false;
   m_audio_frequence = audio_frequence;
@@ -203,8 +203,8 @@ int rtcRTPPackage::PackAAC(RtpPacket *packet, char *encode_buf,
   // 二、rtp时间戳的纠正思路
   // 为保证服务器转码的正常运行，在大尺度上应按方法1计算时间戳，而为保证webrtc播放，在微观上应按方法2计算时间戳。
   // 具体操作是，按方法1和方法2分别计算时间戳，
-  // 当两者差异 < 50ms时，以方法2为准；
-  // 当两者差异在[50 - 100]ms时，将方法2的计算值微调，微调m_audio_frame_size的量，使其更靠近方法1的值；
+  // 当两者差异 < 30ms时，以方法2为准；
+  // 当两者差异在[30 - 100]ms时，将方法2的计算值微调，微调m_audio_frame_size的量，使其更靠近方法1的值；
   // 当两者差异 > 100ms时，以方法1的计算为准，但保证时间戳为m_audio_frame_size的整数倍。
   // 三、限制条件
   // 通常来说，音频采集设备是很稳定的，即capture_ms会按均匀间隔递增，此时不会有什么问题。
@@ -221,28 +221,27 @@ int rtcRTPPackage::PackAAC(RtpPacket *packet, char *encode_buf,
   unsigned int rtp_ts_capture = (capture_ms - m_audio_start_capture_ms)
     * rtp_timestamp_1ms;
   // 以采样点累加的rtp时间戳
-  unsigned int rtp_ts_sample = m_audio_count * m_audio_frame_size;
+  unsigned int rtp_ts_sample = m_autio_rtp_ts;
   // 两个rtp时间戳的差值为理论调整量
   int diff = int(rtp_ts_capture - rtp_ts_sample);
 
   if (abs(diff) > rtp_timestamp_100ms) {
     // 偏差量太大了（大于100ms），以采样时间为准，但将rtp时间戳调整为m_audio_frame_size整数倍
-    m_audio_count = rtp_ts_capture / m_audio_frame_size;
-    rtp_ts_sample = m_audio_count * m_audio_frame_size;
+    rtp_ts_sample = rtp_ts_capture / m_audio_frame_size * m_audio_frame_size;
   }
   else {
-    // 偏差量较小（50-100ms），每次微调1个rtp包的时间戳（即m_audio_frame_size大小）
-    int rtp_timestamp_50ms = rtp_timestamp_1ms * 50;
-    if (diff >= rtp_timestamp_50ms) {
-      m_audio_count++;
+    // 偏差量较小（30-100ms），每次微调1个rtp包的时间戳（即m_audio_frame_size大小）
+    int rtp_timestamp_30ms = rtp_timestamp_1ms * 30;
+    if (diff >= rtp_timestamp_30ms) {
       rtp_ts_sample += m_audio_frame_size;
     }
-    else if (diff <= -rtp_timestamp_50ms) {
-      m_audio_count--;
+    else if (diff <= -rtp_timestamp_30ms) {
       rtp_ts_sample -= m_audio_frame_size;
     }
+    // rtp包不能太大，否则一次调整大于30ms * 2，有可能会导致一段时间内反复正反方向调整
+    assert((int)m_audio_frame_size < rtp_timestamp_30ms * 2);
   }
-  m_audio_count++;
+  m_autio_rtp_ts = rtp_ts_sample + m_audio_frame_size;
 
   if ((int)m_audio_rtp_buf.size() < encode_len + 100) {
     m_audio_rtp_buf.resize(encode_len + 100);

@@ -41,7 +41,7 @@ private:
   static int GetAnnexbNALU(std::vector<NALU_t> &nalu, char *buf, int len);
 
   unsigned short m_audio_seqnum;
-  unsigned int m_audio_count;
+  unsigned int m_autio_rtp_ts;
   unsigned int m_audio_start_capture_ms;
   unsigned int m_audio_ssrc;
   bool m_audio_inited;
