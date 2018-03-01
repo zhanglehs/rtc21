@@ -215,11 +215,11 @@ UploadWindow::UploadWindow(FXApp* a) : FXMainWindow(a, "upload_unitest", NULL, N
 
   new FXLabel(upload_init_matrix, "tcp", NULL, LAYOUT_LEFT | FRAME_NONE);
   tcp_port_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
-  tcp_port_text_->setText(tr("8102"));
+  tcp_port_text_->setText(tr("8142"));
 
   new FXLabel(upload_init_matrix, "http", NULL, LAYOUT_LEFT | FRAME_NONE);
   http_port_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FILL_X | LAYOUT_FILL_COLUMN);
-  http_port_text_->setText(tr("8142"));
+  http_port_text_->setText(tr("8102"));
 
   new FXLabel(upload_init_matrix, "videoRate", NULL, LAYOUT_LEFT | FRAME_NONE);
   video_rate_text_ = new FXTextField(upload_init_matrix, 2, NULL, 0, FRAME_SUNKEN | FRAME_THICK | LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
